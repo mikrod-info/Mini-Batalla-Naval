@@ -10,15 +10,13 @@
     android:layout_margin="20dp">
     <TableRow>
         <TextView
+            android:id="@+id/tvTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:textSize="32sp"
-            android:textColor="@color/colorPrimario"
-            android:text="@string/nombre_juego"
             android:layout_marginBottom="16dp"
-            android:fontFamily="@font/pirata_one_regular"
+            style="@style/estilo_titulo"
             />
     </TableRow>
 
@@ -28,9 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="22sp"
-            android:textColor="@color/colorPrimario"
-            android:fontFamily="@font/pirata_one_regular"
+            style="@style/estilo_text_view"
             />
     </TableRow>
 
@@ -39,17 +35,13 @@
             android:id="@+id/tvMovimientos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@color/colorPrimario"
-            android:fontFamily="@font/pirata_one_regular"
+            style="@style/estilo_text_view"
             />
         <TextView
             android:id="@+id/tvAciertos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textColor="@color/colorPrimario"
-            android:fontFamily="@font/pirata_one_regular"
+            style="@style/estilo_text_view"
             />
     </TableRow>
 
@@ -74,8 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="-"
-            android:fontFamily="@font/pirata_one_regular"
-            android:elevation="6dp"
+            style="@style/estilo_boton_reiniciar"
             />
     </LinearLayout>
 

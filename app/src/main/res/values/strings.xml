@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Mini_Batalla_Naval</string>
-    <string name="nombre_juego">Mini Batalla Naval</string>
+    <string name="ui_titulo">Mini Batalla Naval</string>
+    <string name="ui_reiniciar">Reiniciar</string>
+    <string name="updater_restantes">Barcos restantes: %1$d</string>
+    <string name="updater_movimientos">Movimientos: %1$d</string>
+    <string name="updater_aciertos">Aciertos: %1$d</string>
+    <string name="emoji_barco">🛳</string>
+    <string name="emoji_agua">🌊</string>
+    <string name="toast_tocado">¡Tocado!</string>
+    <string name="toast_agua">¡Agua!</string>
 
 </resources>

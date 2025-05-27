@@ -1,16 +1,14 @@
-package com.example.mini_batalla_naval.model;
+package com.example.mini_batalla_naval.model
 
-public class Celda {
-    private boolean ocupado;
+internal class Celda(
+    private var estaOcupada: Boolean = false
+) {
 
-    public Celda(){
-        this.ocupado = false;
+    fun estaOcupada(): Boolean {
+        return this.estaOcupada
     }
 
-    public boolean estaOcupado(){
-        return this.ocupado;
-    }
-    public void setOcupado() {
-        this.ocupado = true;
+    fun ocupar() {
+        this.estaOcupada = true
     }
 }

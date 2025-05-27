@@ -1,62 +1,46 @@
-package com.example.mini_batalla_naval.model;
+package com.example.mini_batalla_naval.model
 
-public class Tablero {
-    private int cantidadBarcos;
-    private int filas;
-    private int columnas;
-    private final Celda[][] celdas;
+class Tablero(
+    private val filas: Int,
+    private val columnas: Int
+) {
+    private val cantidadBarcos: Int
+    private val celdas: Array<Array<Celda>>
 
-    public Tablero(int filas, int columnas){
-        //podría pedir solo dimensión y hacer una matriz cuadrada. pero al pedir tanto filas y
-        // columnas da la opción de posiblemente generar otras dimensiones de matrices a futuro
-        this.setFilas(filas);
-        this.setColumnas(columnas);
-        //random para rango de [10, 15]. fórmula: (Math.random() * (B-A+1)) + A)
-        this.setCantidadBarcos((int) (Math.random() * 6) + 10);
-        celdas = new Celda[this.filas][this.columnas];
-        inicializarMatriz();
-        cargarBarcos();
+    init {
+        //random para rango de [10, 15].
+        //((Math.random() * (15-10+1 = 6)) + 10)
+        this.cantidadBarcos = randomEnRango(15,10)
+        //inicializa la matriz de celdas. al no pasar parámetros, se inicializa con celdas con valor false.
+        celdas = Array (this.filas) { Array(this.columnas) { Celda() } }
+        cargarBarcos()
     }
 
-    private void setFilas(int filas) {
-        this.filas = filas;
+    fun celdaOcupada(fila: Int, columna: Int): Boolean {
+        return this.celdas[fila][columna].estaOcupada()
     }
 
-    private void setColumnas(int columnas) {
-        this.columnas = columnas;
+    fun getCantidadBarcos(): Int {
+        return this.cantidadBarcos
     }
 
-    private void setCantidadBarcos(int cantidadBarcos) {
-        this.cantidadBarcos = cantidadBarcos;
-    }
+    private fun cargarBarcos() {
+        var barcosCargados = 0
+        while (barcosCargados < this.cantidadBarcos) {
+            //el rango acá es de [0,5] en matriz de 6*6
+            //((Math.random() * (5-0+1 = 6)) + 0)
+            val filaRandom = randomEnRango(0,this.filas-1)
+            val columnaRandom = randomEnRango(0,this.columnas-1)
 
-    private void cargarBarcos() {
-        int barcosCargados = 0;
-        while(barcosCargados < this.cantidadBarcos){
-            //misma fórmula random. el rango acá es de [0,5] en matriz de 6*6
-            int filaRandom = (int)(Math.random()*this.filas);
-            int columnaRandom = (int)(Math.random()*this.columnas);
-
-            if(!celdas[filaRandom][columnaRandom].estaOcupado()){
-                celdas[filaRandom][columnaRandom].setOcupado();
-                barcosCargados++;
+            if (!celdas[filaRandom][columnaRandom].estaOcupada()) {
+                celdas[filaRandom][columnaRandom].ocupar()
+                barcosCargados++
             }
         }
     }
 
-    private void inicializarMatriz() {
-        for (int i = 0; i < this.filas; i++){
-            for (int j = 0; j < this.columnas; j++){
-                celdas[i][j] = new Celda();
-            }
-        }
-    }
-
-    public Celda getCelda(int fila, int columna){
-        return this.celdas[fila][columna];
-    }
-
-    public int getCantidadBarcos() {
-        return this.cantidadBarcos;
+    private fun randomEnRango(min: Int, max: Int): Int {
+        //fórmula para retornar un valor random en rango [A,B]: (Math.random() * (B-A+1)) + A)
+        return (Math.random() * (max - min + 1)).toInt() + min
     }
 }

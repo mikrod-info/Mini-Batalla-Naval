@@ -1,55 +1,54 @@
-package com.example.mini_batalla_naval.model;
+package com.example.mini_batalla_naval.model
 
-import android.widget.TextView;
+import android.content.Context
+import android.widget.TextView
+import com.example.mini_batalla_naval.R
 
-public class UpdaterTextView {
-    private int valorRestante, valorMovimientos, valorAciertos;
-    private TextView tvRestante, tvMovimientos, tvAciertos;
+class UpdaterTextView(
+    context: Context,
+    private val tvRestantes: TextView,
+    private val tvMovimientos: TextView,
+    private val tvAciertos: TextView,
+    private val cantidadBarcos: Int
+) {
+    private var valorRestante: Int
+    private var valorMovimientos: Int
+    private var valorAciertos: Int
+    private val strRestante: String
+    private val strMovimientos: String
+    private val strAciertos: String
 
-    public UpdaterTextView(TextView tvRestante, TextView tvMovimientos, TextView tvAciertos, int cantidadBarcos) {
-        this.setTvRestante(tvRestante);
-        this.setTvMovimientos(tvMovimientos);
-        this.setTvAciertos(tvAciertos);
-        inicializarContadores(cantidadBarcos);
-        actualizarVistas();
+    init {
+        this.valorRestante = 0
+        this.valorMovimientos = 0
+        this.valorAciertos = 0
+        this.strRestante = context.getString(R.string.updater_restantes)
+        this.strMovimientos = context.getString(R.string.updater_movimientos)
+        this.strAciertos = context.getString(R.string.updater_aciertos)
+
+        this.inicializarContadores()
+        this.actualizarVistas()
     }
 
-    private void setTvRestante(TextView tvRestante) {
-        this.tvRestante = tvRestante;
+    private fun inicializarContadores() {
+        this.valorRestante = this.cantidadBarcos
+        this.valorMovimientos = 0
+        this.valorAciertos = 0
     }
 
-    private void setTvMovimientos(TextView tvMovimientos) {
-        this.tvMovimientos = tvMovimientos;
+    private fun actualizarVistas() {
+        this.tvRestantes.text = String.format(this.strRestante, this.valorRestante)
+        this.tvMovimientos.text = String.format(this.strMovimientos, this.valorMovimientos)
+        this.tvAciertos.text = String.format(this.strAciertos, this.valorAciertos)
     }
 
-    private void setTvAciertos(TextView tvAciertos) {
-        this.tvAciertos = tvAciertos;
+    fun actualizar() {
+        this.valorMovimientos++
+        actualizarVistas()
     }
 
-    private void inicializarContadores(int cantidadBarcos) {
-        this.valorRestante = cantidadBarcos;
-        this.valorMovimientos = 0;
-        this.valorAciertos = 0;
+    fun incrementarAcierto() {
+        this.valorRestante--
+        this.valorAciertos++
     }
-
-    private void actualizarVistas() {
-        String strRestante = "Barcos restantes: " + this.valorRestante;
-        String strMovimientos = "Movimientos: " + this.valorMovimientos;
-        String strAciertos = "Aciertos: " + this.valorAciertos;
-
-        this.tvRestante.setText(strRestante);
-        this.tvMovimientos.setText(strMovimientos);
-        this.tvAciertos.setText(strAciertos);
-    }
-
-    public void actualizar(){
-        this.valorMovimientos++;
-        actualizarVistas();
-    }
-
-    public void incrementarAcierto(){
-        this.valorRestante--;
-        this.valorAciertos++;
-    }
-
 }
