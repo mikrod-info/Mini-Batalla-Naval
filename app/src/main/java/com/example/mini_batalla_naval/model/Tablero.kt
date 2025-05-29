@@ -10,7 +10,7 @@ class Tablero(
     init {
         //random para rango de [10, 15].
         //((Math.random() * (15-10+1 = 6)) + 10)
-        this.cantidadBarcos = randomEnRango(15,10)
+        this.cantidadBarcos = randomEnRango(10,15)
         //inicializa la matriz de celdas. al no pasar parámetros, se inicializa con celdas con valor false.
         celdas = Array (this.filas) { Array(this.columnas) { Celda() } }
         cargarBarcos()
@@ -32,8 +32,8 @@ class Tablero(
             val filaRandom = randomEnRango(0,this.filas-1)
             val columnaRandom = randomEnRango(0,this.columnas-1)
 
-            if (!celdas[filaRandom][columnaRandom].estaOcupada()) {
-                celdas[filaRandom][columnaRandom].ocupar()
+            if (!celdaOcupada(filaRandom, columnaRandom)) {
+                this.celdas[filaRandom][columnaRandom].ocupar()
                 barcosCargados++
             }
         }

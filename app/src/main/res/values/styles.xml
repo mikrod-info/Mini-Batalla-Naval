@@ -4,6 +4,9 @@
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/colorPrimario</item>
         <item name="android:fontFamily">@font/pirata_one_regular</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textAlignment">center</item>
     </style>
     <style name="estilo_text_view">
         <item name="android:textSize">16sp</item>
@@ -16,9 +19,10 @@
         <item name="android:background">@color/azulMar</item>
     </style>
     <style name="estilo_boton_reiniciar" parent="@style/Widget.AppCompat.Button">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/chelsea_market_regular</item>
         <item name="android:backgroundTint">@color/colorSecundario</item>
+        <item name="android:layout_margin">16dp</item>
     </style>
 </resources>

@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.GridLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.example.mini_batalla_naval.model.UpdaterTextView
 import com.example.mini_batalla_naval.model.Tablero
+import com.example.mini_batalla_naval.model.WinEventListener
 
 //Grupo1: Kruk, Ivana y Rodriguez, Miguel
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), WinEventListener {
+    private lateinit var glTablero: GridLayout
+    private lateinit var tableroLogico: Tablero
+    private lateinit var updater: UpdaterTextView
+    private var juegoTerminado: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,17 +25,18 @@ class MainActivity : AppCompatActivity() {
         tvTitulo.text = this.getString(R.string.ui_titulo)
 
         //tablero y celdas
-        val glTablero = findViewById<GridLayout>(R.id.glTablero)
+        glTablero = findViewById<GridLayout>(R.id.glTablero)
         val filas = 6
         val columnas = 6
-        val tablero = Tablero(filas, columnas)
+        tableroLogico = Tablero(filas, columnas)
 
         //text views
         val tvRestantes = findViewById<TextView>(R.id.tvRestantes)
         val tvMovimientos = findViewById<TextView>(R.id.tvMovimientos)
         val tvAciertos = findViewById<TextView>(R.id.tvAciertos)
-        val updater = UpdaterTextView(this, tvRestantes, tvMovimientos, tvAciertos, tablero.getCantidadBarcos())
-        crearBotonesDelTablero(glTablero, tablero, filas, columnas, updater)
+        val tvMensajeJuego = findViewById<TextView>(R.id.tvMensajeJuego)
+        updater = UpdaterTextView(this, tvRestantes, tvMovimientos, tvAciertos,tvMensajeJuego, tableroLogico.getCantidadBarcos(),this)
+        crearBotonesDelTablero(filas, columnas)
 
         //botón de reinicio
         val bReiniciar = findViewById<Button>(R.id.bReiniciar)
@@ -46,20 +52,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun crearBotonesDelTablero(
-        glTablero: GridLayout,
-        tablero: Tablero,
         filas: Int,
         columnas: Int,
-        updater: UpdaterTextView
     ) {
         //esta función crea botones con event listener que invocan internamente al updater 1 por botón 1 sola vez
-        glTablero.removeAllViews()
-        glTablero.rowCount = filas
-        glTablero.columnCount = columnas
-        val toastTocado = this.getString(R.string.toast_tocado)
-        val toastAgua = this.getString(R.string.toast_agua)
-        val strTocado = this.getString(R.string.emoji_barco)//"🛳"
-        val strAgua = this.getString(R.string.emoji_agua)//"🌊"
+        this.glTablero.removeAllViews()
+        this.glTablero.rowCount = filas
+        this.glTablero.columnCount = columnas
+        val emojiAgua = this.getString(R.string.emoji_agua)
+        val emojiBarco = this.getString(R.string.emoji_barco)
 
         //contenido del glTablero(gridlayout).
         for (i in 0 until filas){
@@ -75,22 +76,29 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 boton.setOnClickListener{
-                    if (tablero.celdaOcupada(i,j)){
-                        //tablero.celdaOcupada(fila,columna) retorna true si la celda está ocupada.
-                        boton.text = strTocado
-                        Toast.makeText(this, toastTocado, Toast.LENGTH_SHORT).show()
-                        updater.incrementarAcierto()
-                    } else {
-                        boton.text = strAgua
-                        Toast.makeText(this, toastAgua, Toast.LENGTH_SHORT).show()
-                    }
-                    updater.actualizar()
-                    //se apaga el botón después de ser tocado.
-                    boton.setEnabled(false)
+                    //control de ejecución de evento. Esto impide que se ejecute más de una vez.
+                    if (this.juegoTerminado || !it.isEnabled) return@setOnClickListener
+
+                    val fueAcierto = this.tableroLogico.celdaOcupada(i,j)
+                    boton.text = if (fueAcierto) emojiBarco else emojiAgua
+                    updater.registrarActividad(fueAcierto)
+                    it.isEnabled = false
                 }
-                glTablero.addView(boton)
+                this.glTablero.addView(boton)
             }
         }
+    }
+
+    private fun deshabilitarTablero(){
+        for (i in 0 until this.glTablero.childCount){
+            val boton = this.glTablero.getChildAt(i)
+            if (boton.isEnabled) boton.isEnabled = false
+        }
+    }
+
+    override fun onGameWon() {
+        this.juegoTerminado = true
+        deshabilitarTablero()
     }
 }
 
