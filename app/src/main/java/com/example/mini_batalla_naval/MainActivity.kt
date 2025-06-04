@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.mini_batalla_naval.model.UpdaterTextView
 import com.example.mini_batalla_naval.model.Tablero
 import com.example.mini_batalla_naval.model.WinEventListener
+import android.content.Intent
 
 //Grupo1: Kruk, Ivana y Rodriguez, Miguel
 class MainActivity : AppCompatActivity(), WinEventListener {
@@ -42,7 +43,27 @@ class MainActivity : AppCompatActivity(), WinEventListener {
         val bReiniciar = findViewById<Button>(R.id.bReiniciar)
         crearBotonReiniciar(bReiniciar)
 
-    }
+        // --- CONFIGURACIÓN DEL BOTÓN DE AYUDA ---
+        // (Solo debe haber UN bloque para esto)
+        val buttonHelp: Button = findViewById(R.id.buttonOpenHelpFromMain)
+        buttonHelp.setOnClickListener {
+            // Crear un Intent para iniciar HelpActivity
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent) // Lanza la actividad de ayuda
+        } // La llave de cierre de este setOnClickListener estaba bien aquí
+
+        // EL SIGUIENTE BLOQUE ESTABA DUPLICADO Y CAUSABA ERRORES, LO HE ELIMINADO:
+        /*
+        val buttonHelp: Button = findViewById(R.id.buttonOpenHelpFromMain) // Asegúrate que el ID sea el mismo que en tu XML
+        buttonHelp.setOnClickListener {
+            // Crear un Intent para iniciar HelpActivity
+            val intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent) // Lanza la actividad de ayuda
+
+        // LA LLAVE DE CIERRE '}' ESTABA FALTANDO AQUÍ Y EL 'setOnClickListenner' NO ESTABA CERRADO
+        */
+
+    } // Esta es la llave de cierre de la función onCreate
 
     private fun crearBotonReiniciar(boton: Button) {
         boton.text = this.getString(R.string.ui_reiniciar)
@@ -100,9 +121,4 @@ class MainActivity : AppCompatActivity(), WinEventListener {
         this.juegoTerminado = true
         deshabilitarTablero()
     }
-}
-
-
-
-
-
+} // Esta es la llave de cierre de la clase MainActivity
