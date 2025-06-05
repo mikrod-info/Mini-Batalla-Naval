@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mini_Batalla_Naval</string>
-    <string name="ui_titulo">Mini Batalla Naval</string>
-    <string name="ui_reiniciar">Reiniciar</string>
+    <string name="main_titulo">Mini Batalla Naval</string>
+    <string name="menu_reiniciar">Reiniciar</string>
     <string name="updater_restantes">Barcos restantes: %1$d</string>
     <string name="updater_movimientos">Movimientos: %1$d</string>
     <string name="updater_aciertos">Aciertos: %1$d</string>
@@ -10,4 +10,13 @@
     <string name="updater_victoria">¡Victoria!🥳🎉 ganaste en %1$d movimientos. Encontraste %2$d barcos y %3$d olitas</string>
     <string name="emoji_barco">🛳</string>
     <string name="emoji_agua">🌊</string>
+    <string name="main_ingresarNombre">Ingrese nombre</string>
+    <string name="main_ingresarDificultad">Seleccione dificultad</string>
+    <string name="main_hintNombre">pepitoPerez</string>
+    <string name="main_jugar">Jugar</string>
+    <string-array name="opciones_dificultad_array">
+         <item>Fácil</item>
+         <item>Media</item>
+         <item>Difícil</item>
+     </string-array>
 </resources>

@@ -5,4 +5,5 @@
     <color name="azulMar">#80f0ff</color>
     <color name="colorPrimario">#774EBF</color>
     <color name="colorSecundario">#947EE7</color>
+    <color name="colorHint">#8D6E63</color>
 </resources>
