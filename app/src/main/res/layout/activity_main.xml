@@ -1,99 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="*"
-    android:padding="30dp"
-    android:layout_margin="20dp">
-    <TableRow>
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/estilo_titulo"
-            />
-    </TableRow>
+    android:padding="24dp"
+    tools:context=".MainActivity">
 
-    <TableRow>
-        <TextView
-            android:id="@+id/tvRestantes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/estilo_text_view"
-            />
-    </TableRow>
+<TextView
+android:id="@+id/textViewTitulo"
+style="@style/estilo_titulo"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/main_titulo"
+    android:textAlignment="center"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalInputs"
+    app:layout_constraintVertical_chainStyle="packed"
+    app:layout_constraintVertical_bias="0.3" />
 
-    <TableRow
-        android:layout_marginBottom="8dp"
-        >
-        <TextView
-            android:id="@+id/tvMovimientos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/estilo_text_view"
-            />
-        <TextView
-            android:id="@+id/tvAciertos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/estilo_text_view"
-            />
-    </TableRow>
-
-    <GridLayout
-        android:id="@+id/glTablero"
-        android:layout_width="match_parent"
+    <!-- Guía para separar el título de los inputs -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontalInputs"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:useDefaultMargins="true"
-        android:alignmentMode="alignMargins"
-        >
-    </GridLayout>
-
-    <TableRow
-        android:layout_marginTop="16dp"
-        >
-        <TextView
-            android:id="@+id/tvMensajeJuego"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            style="@style/estilo_text_view"
-            />
-    </TableRow>
-
-    <LinearLayout
-        android:gravity="center_horizontal"
-        >
-        <Button
-            android:id="@+id/bReiniciar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            style="@style/estilo_boton_reiniciar"
-            />
-    </LinearLayout>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp" /> <!-- Mueve esta línea para dar más o menos espacio a los inputs -->
 
 
-    <TableRow
-        android:layout_marginTop="8dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_span="1">
-            <Button
-            android:id="@+id/buttonOpenHelpFromMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ayuda"
-            style="@style/estilo_boton_reiniciar"
-            />
-        </LinearLayout>
-    </TableRow>
+    <!-- Grupo de Inputs -->
+    <!-- Input Nombre -->
+<TextView
+android:id="@+id/textViewLabelNombre"
+style="@style/estilo_text_view"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="@string/main_ingresarNombre"
+app:layout_constraintTop_toTopOf="@+id/editTextNombre"
+app:layout_constraintBottom_toBottomOf="@+id/editTextNombre"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toStartOf="@+id/editTextNombre"
+android:layout_marginEnd="24dp"
+    android:layout_marginStart="24dp"/>
 
-</TableLayout>
+<EditText
+android:id="@+id/editTextNombre"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:autofillHints="username"
+android:hint="@string/main_hintNombre"
+android:inputType="textPersonName"
+android:minHeight="48dp"
+android:textColorHint="@color/colorHint"
+app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalInputs"
+app:layout_constraintStart_toEndOf="@+id/textViewLabelNombre"
+app:layout_constraintEnd_toEndOf="parent"
+android:layout_marginTop="16dp"
+    android:layout_marginEnd="24dp"/>
+
+    <!-- Input Dificultad -->
+<TextView
+android:id="@+id/textViewLabelDificultad"
+style="@style/estilo_text_view"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="@string/main_ingresarDificultad"
+app:layout_constraintTop_toTopOf="@+id/spinnerOptions"
+app:layout_constraintBottom_toBottomOf="@+id/spinnerOptions"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toStartOf="@+id/spinnerOptions"
+android:layout_marginEnd="24dp"
+    android:layout_marginStart="24dp"/>
+
+<Spinner
+android:id="@+id/spinnerOptions"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:minHeight="48dp"
+android:entries="@array/opciones_dificultad_array"
+app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
+app:layout_constraintStart_toEndOf="@+id/textViewLabelDificultad"
+app:layout_constraintEnd_toEndOf="parent"
+android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"/>
+
+
+    <!-- Guía para separar los inputs del botón -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontalBoton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="502dp" /> <!-- Mueve esta línea para dar más o menos espacio al botón -->
+
+
+    <!-- Grupo del Botón -->
+<Button
+android:id="@+id/buttonJugar"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:minHeight="48dp"
+android:text="@string/main_jugar"
+app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalBoton"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintVertical_bias="0.7" /> <!-- Ajusta este bias para moverlo más arriba o abajo del centro del espacio inferior -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
