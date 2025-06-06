@@ -9,66 +9,77 @@ import com.example.mini_batalla_naval.model.UpdaterTextView
 import com.example.mini_batalla_naval.model.Tablero
 import com.example.mini_batalla_naval.model.WinEventListener
 import android.content.Intent
+import android.view.View
+import android.widget.ImageButton
+import androidx.appcompat.widget.PopupMenu
 
 //Grupo1: Kruk, Ivana y Rodriguez, Miguel
 class GameActivity : AppCompatActivity(), WinEventListener {
     private lateinit var glTablero: GridLayout
     private lateinit var tableroLogico: Tablero
     private lateinit var updater: UpdaterTextView
+    private lateinit var tvRestantes: TextView
+    private lateinit var tvMovimientos: TextView
+    private lateinit var tvAciertos: TextView
+    private lateinit var tvMensajeJuego: TextView
     private var juegoTerminado: Boolean = false
+    private var dimensionRecibida: Int = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        //titulo
-        val tvTitulo = findViewById<TextView>(R.id.tvTitulo)
-        tvTitulo.text = this.getString(R.string.main_titulo)
-
         //tablero y celdas
-        glTablero = findViewById<GridLayout>(R.id.glTablero)
-        val filas = 6
-        val columnas = 6
-        tableroLogico = Tablero(filas, columnas)
+        dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
+        this.glTablero = findViewById<GridLayout>(R.id.glTablero)
+        this.tableroLogico = Tablero(dimensionRecibida, dimensionRecibida)
 
         //text views
-        val tvRestantes = findViewById<TextView>(R.id.tvRestantes)
-        val tvMovimientos = findViewById<TextView>(R.id.tvMovimientos)
-        val tvAciertos = findViewById<TextView>(R.id.tvAciertos)
-        val tvMensajeJuego = findViewById<TextView>(R.id.tvMensajeJuego)
-        updater = UpdaterTextView(this, tvRestantes, tvMovimientos, tvAciertos,tvMensajeJuego, tableroLogico.getCantidadBarcos(),this)
-        crearBotonesDelTablero(filas, columnas)
+        this.tvRestantes = findViewById<TextView>(R.id.tvRestantes)
+        this.tvMovimientos = findViewById<TextView>(R.id.tvMovimientos)
+        this.tvAciertos = findViewById<TextView>(R.id.tvAciertos)
+        this.tvMensajeJuego = findViewById<TextView>(R.id.tvMensajeJuego)
+        this.updater = UpdaterTextView(
+            this,
+            tvRestantes,
+            tvMovimientos,
+            tvAciertos,
+            tvMensajeJuego,
+            this.tableroLogico.getCantidadBarcos(),
+            this
+        )
+        crearBotonesDelTablero(dimensionRecibida, dimensionRecibida)
 
         //botón de reinicio
-        val bReiniciar = findViewById<Button>(R.id.bReiniciar)
-        crearBotonReiniciar(bReiniciar)
+        val btnReiniciar = findViewById<Button>(R.id.btnReiniciar)
+        crearBotonReiniciar(btnReiniciar)
 
-        // --- CONFIGURACIÓN DEL BOTÓN DE AYUDA ---
-        // (Solo debe haber UN bloque para esto)
-        val buttonHelp: Button = findViewById(R.id.buttonOpenHelpFromMain)
-        buttonHelp.setOnClickListener {
-            // Crear un Intent para iniciar HelpActivity
-            val intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent) // Lanza la actividad de ayuda
-        } // La llave de cierre de este setOnClickListener estaba bien aquí
+        //
+        val btnShowPopup: ImageButton = findViewById(R.id.btnMainHelp)
+        btnShowPopup.setOnClickListener { it ->
+            showGamePopupMenu(it)
+        }
 
-        // EL SIGUIENTE BLOQUE ESTABA DUPLICADO Y CAUSABA ERRORES, LO HE ELIMINADO:
-        /*
-        val buttonHelp: Button = findViewById(R.id.buttonOpenHelpFromMain) // Asegúrate que el ID sea el mismo que en tu XML
-        buttonHelp.setOnClickListener {
-            // Crear un Intent para iniciar HelpActivity
-            val intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent) // Lanza la actividad de ayuda
 
-        // LA LLAVE DE CIERRE '}' ESTABA FALTANDO AQUÍ Y EL 'setOnClickListenner' NO ESTABA CERRADO
-        */
-
-    } // Esta es la llave de cierre de la función onCreate
+    }
 
     private fun crearBotonReiniciar(boton: Button) {
         boton.text = this.getString(R.string.menu_reiniciar)
-        boton.setOnClickListener{
-            recreate()
+        boton.setOnClickListener {
+            //recreate()
+            //reinicio de variables y objetos.
+            //el objetiivo es evitar parpadeos porque recreate recorre t0do el ciclo de vida de la actividad.
+            this.tableroLogico = Tablero(dimensionRecibida, dimensionRecibida)
+            this.updater = UpdaterTextView(
+                this,
+                this.tvRestantes,
+                this.tvMovimientos,
+                this.tvAciertos,
+                this.tvMensajeJuego,
+                this.tableroLogico.getCantidadBarcos(),
+                this
+            )
+            crearBotonesDelTablero(dimensionRecibida, dimensionRecibida)
         }
     }
 
@@ -82,10 +93,17 @@ class GameActivity : AppCompatActivity(), WinEventListener {
         this.glTablero.columnCount = columnas
         val emojiAgua = this.getString(R.string.emoji_agua)
         val emojiBarco = this.getString(R.string.emoji_barco)
+        val tamanioEmoji = when (filas) {
+            6 -> 24
+            8 -> 20
+            10 -> 16
+            else -> 24
+        }
+
 
         //contenido del glTablero(gridlayout).
-        for (i in 0 until filas){
-            for (j in 0 until columnas){
+        for (i in 0 until filas) {
+            for (j in 0 until columnas) {
                 //crear botón y agregar a gridlayout. el estilo viene de styles.xml
                 val boton = Button(this, null, 0, R.style.estilo_boton_tablero)
                 boton.text = ""
@@ -96,11 +114,12 @@ class GameActivity : AppCompatActivity(), WinEventListener {
                     columnSpec = GridLayout.spec(j, 1f)
                 }
 
-                boton.setOnClickListener{
+                boton.textSize = tamanioEmoji.toFloat()
+                boton.setOnClickListener {
                     //control de ejecución de evento. Esto impide que se ejecute más de una vez.
                     if (this.juegoTerminado || !it.isEnabled) return@setOnClickListener
 
-                    val fueAcierto = this.tableroLogico.celdaOcupada(i,j)
+                    val fueAcierto = this.tableroLogico.celdaOcupada(i, j)
                     boton.text = if (fueAcierto) emojiBarco else emojiAgua
                     updater.registrarActividad(fueAcierto)
                     it.isEnabled = false
@@ -110,8 +129,8 @@ class GameActivity : AppCompatActivity(), WinEventListener {
         }
     }
 
-    private fun deshabilitarTablero(){
-        for (i in 0 until this.glTablero.childCount){
+    private fun deshabilitarTablero() {
+        for (i in 0 until this.glTablero.childCount) {
             val boton = this.glTablero.getChildAt(i)
             if (boton.isEnabled) boton.isEnabled = false
         }
@@ -121,4 +140,32 @@ class GameActivity : AppCompatActivity(), WinEventListener {
         this.juegoTerminado = true
         deshabilitarTablero()
     }
-} // Esta es la llave de cierre de la clase MainActivity
+
+    private fun showGamePopupMenu(view: View) {
+        val popup = PopupMenu(this, view)
+        val inflater = popup.menuInflater
+        inflater.inflate(R.menu.menu_popup, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.opInicio -> {
+                    // Acción para "Inicio": Volver a MainActivity
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+
+                R.id.opAyuda -> {
+                    // Acción para "Ayuda": Abrir HelpActivity
+                    val intent = Intent(this, HelpActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popup.show()
+    }
+}

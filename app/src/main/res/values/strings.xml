@@ -15,8 +15,8 @@
     <string name="main_hintNombre">pepitoPerez</string>
     <string name="main_jugar">Jugar</string>
     <string-array name="opciones_dificultad_array">
-         <item>Fácil</item>
-         <item>Media</item>
-         <item>Difícil</item>
-     </string-array>
+        <item>6 x 6</item>
+        <item>8 x 8</item>
+        <item>10 x 10</item>
+    </string-array>
 </resources>

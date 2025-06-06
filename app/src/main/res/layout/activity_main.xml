@@ -5,87 +5,95 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:padding="50dp"
     tools:context=".MainActivity">
 
-<TextView
-android:id="@+id/textViewTitulo"
-style="@style/estilo_titulo"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="@string/main_titulo"
-    android:textAlignment="center"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalInputs"
-    app:layout_constraintVertical_chainStyle="packed"
-    app:layout_constraintVertical_bias="0.3" />
+    <ImageButton
+        android:id="@+id/btnMainHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Botón de menú ayuda"
+        android:src="@drawable/ic_help_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Guía para separar el título de los inputs -->
+
+    <TextView
+        android:id="@+id/tvMainTitulo"
+        style="@style/estilo_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/main_titulo"
+        android:textAlignment="center"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalInputs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.708"
+        app:layout_constraintVertical_chainStyle="packed" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontalInputs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="366dp" /> <!-- Mueve esta línea para dar más o menos espacio a los inputs -->
+        app:layout_constraintGuide_begin="366dp" />
 
 
     <!-- Grupo de Inputs -->
     <!-- Input Nombre -->
-<TextView
-android:id="@+id/textViewLabelNombre"
-style="@style/estilo_text_view"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="@string/main_ingresarNombre"
-app:layout_constraintTop_toTopOf="@+id/editTextNombre"
-app:layout_constraintBottom_toBottomOf="@+id/editTextNombre"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintEnd_toStartOf="@+id/editTextNombre"
-android:layout_marginEnd="24dp"
-    android:layout_marginStart="24dp"/>
+    <TextView
+        android:id="@+id/textViewLabelNombre"
+        style="@style/estilo_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:text="@string/main_ingresarNombre"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNombre"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextNombre" />
 
-<EditText
-android:id="@+id/editTextNombre"
-android:layout_width="0dp"
-android:layout_height="wrap_content"
-android:autofillHints="username"
-android:hint="@string/main_hintNombre"
-android:inputType="textPersonName"
-android:minHeight="48dp"
-android:textColorHint="@color/colorHint"
-app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalInputs"
-app:layout_constraintStart_toEndOf="@+id/textViewLabelNombre"
-app:layout_constraintEnd_toEndOf="parent"
-android:layout_marginTop="16dp"
-    android:layout_marginEnd="24dp"/>
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="username"
+        android:hint="@string/main_hintNombre"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewLabelNombre"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalInputs" />
 
     <!-- Input Dificultad -->
-<TextView
-android:id="@+id/textViewLabelDificultad"
-style="@style/estilo_text_view"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="@string/main_ingresarDificultad"
-app:layout_constraintTop_toTopOf="@+id/spinnerOptions"
-app:layout_constraintBottom_toBottomOf="@+id/spinnerOptions"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintEnd_toStartOf="@+id/spinnerOptions"
-android:layout_marginEnd="24dp"
-    android:layout_marginStart="24dp"/>
+    <TextView
+        android:id="@+id/textViewLabelDificultad"
+        style="@style/estilo_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:text="@string/main_ingresarDificultad"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="parent"
 
-<Spinner
-android:id="@+id/spinnerOptions"
-android:layout_width="0dp"
-android:layout_height="wrap_content"
-android:minHeight="48dp"
-android:entries="@array/opciones_dificultad_array"
-app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
-app:layout_constraintStart_toEndOf="@+id/textViewLabelDificultad"
-app:layout_constraintEnd_toEndOf="parent"
-android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"/>
+        app:layout_constraintTop_toTopOf="@+id/spinner" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/opciones_dificultad_array"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewLabelDificultad"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
 
     <!-- Guía para separar los inputs del botón -->
@@ -94,20 +102,24 @@ android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="502dp" /> <!-- Mueve esta línea para dar más o menos espacio al botón -->
+        app:layout_constraintGuide_begin="502dp" />
 
 
     <!-- Grupo del Botón -->
-<Button
-android:id="@+id/buttonJugar"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:minHeight="48dp"
-android:text="@string/main_jugar"
-app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalBoton"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintVertical_bias="0.7" /> <!-- Ajusta este bias para moverlo más arriba o abajo del centro del espacio inferior -->
+    <Button
+        android:id="@+id/btnJugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chelsea_market_regular"
+        android:paddingHorizontal="64dp"
+        android:paddingVertical="8dp"
+        android:text="@string/main_jugar"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalBoton"
+        app:layout_constraintVertical_bias="0.481" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
