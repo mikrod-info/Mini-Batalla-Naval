@@ -1,14 +1,27 @@
 package com.example.mini_batalla_naval.model
 
-internal class Celda(
-    private var estaOcupada: Boolean = false
-) {
+class Celda() {
+    private var revelada: Boolean = false
+    private var esBarco: Boolean = false
 
-    fun estaOcupada(): Boolean {
-        return this.estaOcupada
+    constructor(esBarco: Boolean, revelada: Boolean) : this() {
+        this.esBarco = esBarco
+        this.revelada = revelada
     }
 
-    fun ocupar() {
-        this.estaOcupada = true
+    fun esBarco(): Boolean {
+        return this.esBarco
+    }
+
+    fun setBarco() {
+        this.esBarco = true
+    }
+
+    fun setRevelada() {
+        this.revelada = true
+    }
+
+    fun esRevelada(): Boolean {
+        return this.revelada
     }
 }
