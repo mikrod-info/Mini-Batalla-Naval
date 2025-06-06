@@ -9,7 +9,6 @@ class HelpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_help)
 
-
         val buttonBack: Button = findViewById(R.id.btnHelpBack)
         buttonBack.setOnClickListener {
             // Esta acción finaliza (cierra) la actividad actual (HelpActivity)

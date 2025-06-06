@@ -5,13 +5,13 @@ import android.widget.TextView
 import com.example.mini_batalla_naval.R
 
 class UpdaterTextView(
-    context: Context,
-    private val tvRestantes: TextView,
-    private val tvMovimientos: TextView,
-    private val tvAciertos: TextView,
-    private val tvMensajeJuego: TextView,
-    private val cantidadBarcos: Int,
-    private var winEventListener: WinEventListener
+    private val context: Context,
+    private var tvRestantes: TextView,
+    private var tvMovimientos: TextView,
+    private var tvAciertos: TextView,
+    private var tvMensajeJuego: TextView,
+    private var cantidadBarcos: Int,
+    private var gameEventListener: GameEventListener
 ) {
     private var valorRestante: Int
     private var valorMovimientos: Int
@@ -32,16 +32,57 @@ class UpdaterTextView(
         this.valorAciertos = 0
         this.valorFallos = 0
         //inicializa las variables de string.
-        this.strRestante = context.getString(R.string.updater_restantes)
-        this.strMovimientos = context.getString(R.string.updater_movimientos)
-        this.strAciertos = context.getString(R.string.updater_aciertos)
-        this.strAgua = context.getString(R.string.updater_agua)
-        this.strTocado = context.getString(R.string.updater_tocado)
-        this.strMensajeVictoria = context.getString(R.string.updater_victoria)
+        this.strRestante = this.context.getString(R.string.updater_restantes)
+        this.strMovimientos = this.context.getString(R.string.updater_movimientos)
+        this.strAciertos = this.context.getString(R.string.updater_aciertos)
+        this.strAgua = this.context.getString(R.string.updater_agua)
+        this.strTocado = this.context.getString(R.string.updater_tocado)
+        this.strMensajeVictoria = this.context.getString(R.string.updater_victoria)
         this.strMensajeJuego = ""
 
-        this.actualizarVistasContadores()
+        actualizarVistasContadores()
+        actualizarVistaMensajeJuego()
     }
+
+    //métodos para obtener y restaurar el estado de la clase
+    fun obtenerEstado(): UpdaterEstado {
+        return UpdaterEstado(
+            cantidadBarcosData = this.cantidadBarcos,
+            restantesData = this.valorRestante,
+            movimientosData = this.valorMovimientos,
+            aciertosData = this.valorAciertos,
+            fallosData = this.valorFallos,
+            mensajeJuegoData = this.strMensajeJuego
+        )
+    }
+
+    fun restaurarEstado(estado: UpdaterEstado) {
+        this.cantidadBarcos = estado.cantidadBarcosData
+        this.valorRestante = estado.restantesData
+        this.valorMovimientos = estado.movimientosData
+        this.valorAciertos = estado.aciertosData
+        this.valorFallos = estado.fallosData
+        this.strMensajeJuego = estado.mensajeJuegoData
+
+        actualizarVistasContadores()
+        actualizarVistaMensajeJuego()
+    }
+
+    fun registrarActividad(fueAcierto: Boolean) {
+        if (fueAcierto) incrementarAcierto() else incrementarFallo()
+
+        mover()
+        actualizarVistasContadores()
+        actualizarVistaMensajeJuego()
+
+        if (esVictoria()) {
+            reiniciarStrings()
+            informarVictoria()
+            this.gameEventListener.onGameWon()
+        }
+    }
+
+    //métodos auxiliares
 
     private fun actualizarVistasContadores() {
         this.tvRestantes.text = String.format(this.strRestante, this.valorRestante)
@@ -83,33 +124,5 @@ class UpdaterTextView(
         this.strMensajeJuego = String.format(this.strMensajeVictoria, this.valorMovimientos, this.valorAciertos, this.valorFallos)
         actualizarVistaMensajeJuego()
     }
-
-    fun registrarActividad(fueAcierto: Boolean) {
-           if (fueAcierto) incrementarAcierto() else incrementarFallo()
-
-           mover()
-           actualizarVistasContadores()
-           actualizarVistaMensajeJuego()
-
-           if (esVictoria()) {
-               reiniciarStrings()
-               informarVictoria()
-               this.winEventListener.onGameWon()
-           }
-    }
-
-    //En caso de necesitarlos para guardar y cargar el estado del juego.
-//    fun getRestantes(): Int = this.valorRestante
-//    fun getMovimientos(): Int = this.valorMovimientos
-//    fun getAciertos(): Int = this.valorAciertos
-//    fun getFallos(): Int = this.valorFallos
-//
-//    fun setEstado(restantes: Int, movimientos: Int, aciertos: Int, fallos: Int){
-//        this.valorRestante = restantes
-//        this.valorMovimientos = movimientos
-//        this.valorAciertos = aciertos
-//        this.valorFallos = fallos
-//        actualizarVistasContadores()
-//    }
 
 }

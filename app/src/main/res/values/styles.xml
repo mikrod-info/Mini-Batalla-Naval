@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- main -->
+    <!-- game -->
     <style name="estilo_titulo">
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/colorPrimario</item>
@@ -28,4 +29,32 @@
         <item name="android:backgroundTint">@color/colorSecundario</item>
         <item name="android:layout_margin">16dp</item>
     </style>
-</resources>
+    <!-- help -->
+    <style name="estilo_subtitulo_ayuda">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorSecundario</item>
+        <item name="android:fontFamily">@font/chelsea_market_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="estilo_texto_normal_ayuda">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorPrimario</item>
+        <item name="android:fontFamily">@font/chelsea_market_regular</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <!-- Asumiendo que tienes colores definidos en colors.xml como: -->
+    <!-- <color name="colorPrimario">#FF000000</color> -->
+    <!-- <color name="colorSecundario">#FF6200EE</color> -->
+    <!-- <color name="colorTextoPrincipal">#FF000000</color> -->
+    <!-- <color name="colorTextoSecundario">#8A000000</color> (negro con 54% alpha) -->
+    <!-- <color name="colorTextoTitulos">@color/colorPrimario</color> -->
+
+    <!-- También asumiendo que tienes fuentes en res/font/ -->
+    <!-- Por ejemplo: @font/pirata_one_regular y @font/chelsea_market_regular -->
+    <!-- Si no usas fuentes personalizadas, puedes quitar android:fontFamily o usar las de sistema -->
+        </resources>

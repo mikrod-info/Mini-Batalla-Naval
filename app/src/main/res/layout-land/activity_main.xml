@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
+    android:padding="32dp"
     tools:context=".MainActivity">
 
     <ImageButton
@@ -18,43 +18,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Guía para separar el título de los inputs -->
-
     <TextView
         android:id="@+id/tvMainTitulo"
         style="@style/estilo_titulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/main_titulo"
         android:textAlignment="center"
-        android:textSize="64sp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalInputs"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineCenterVertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.708"
+        app:layout_constraintTop_toBottomOf="@id/btnMainHelp"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <!-- Guía vertical para dividir la pantalla o ayudar a posicionar grupos -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontalInputs"
+        android:id="@+id/guidelineCenterVertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="366dp" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-
-    <!-- Grupo de Inputs -->
-    <!-- Input Nombre -->
+    <!-- Grupo de Inputs a la izquierda (o arriba en la mitad izquierda) -->
     <TextView
         android:id="@+id/textViewLabelNombre"
         style="@style/estilo_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/main_ingresarNombre"
         app:layout_constraintBottom_toBottomOf="@+id/editTextNombre"
         app:layout_constraintEnd_toStartOf="@+id/editTextNombre"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextNombre" />
 
@@ -67,59 +67,58 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/colorHint"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenterVertical"
         app:layout_constraintStart_toEndOf="@+id/textViewLabelNombre"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalInputs" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMainTitulo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-    <!-- Input Dificultad -->
     <TextView
         android:id="@+id/textViewLabelDificultad"
         style="@style/estilo_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/main_ingresarDificultad"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="@+id/spinner" />
 
+    <!-- Botón Jugar a la derecha (o abajo en la mitad derecha) -->
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:entries="@array/opciones_dificultad_array"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenterVertical"
         app:layout_constraintStart_toEndOf="@+id/textViewLabelDificultad"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649" />
 
-
-    <!-- Guía para separar los inputs del botón -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontalBoton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="502dp" />
-
-
-    <!-- Grupo del Botón -->
     <Button
         android:id="@+id/btnJugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/chelsea_market_regular"
-        android:paddingHorizontal="64dp"
-        android:paddingVertical="8dp"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="12dp"
         android:text="@string/main_jugar"
-        android:textSize="32sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontalBoton"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintStart_toEndOf="@+id/guidelineCenterVertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.634" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

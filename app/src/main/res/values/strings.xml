@@ -1,15 +1,7 @@
 <resources>
+    <!-- main -->
     <string name="app_name">Mini_Batalla_Naval</string>
     <string name="main_titulo">Mini Batalla Naval</string>
-    <string name="menu_reiniciar">Reiniciar</string>
-    <string name="updater_restantes">Barcos restantes: %1$d</string>
-    <string name="updater_movimientos">Movimientos: %1$d</string>
-    <string name="updater_aciertos">Aciertos: %1$d</string>
-    <string name="updater_tocado">¡Tocado!</string>
-    <string name="updater_agua">¡Agua!</string>
-    <string name="updater_victoria">¡Victoria!🥳🎉 ganaste en %1$d movimientos. Encontraste %2$d barcos y %3$d olitas</string>
-    <string name="emoji_barco">🛳</string>
-    <string name="emoji_agua">🌊</string>
     <string name="main_ingresarNombre">Ingrese nombre</string>
     <string name="main_ingresarDificultad">Seleccione dificultad</string>
     <string name="main_hintNombre">pepitoPerez</string>
@@ -19,4 +11,38 @@
         <item>8 x 8</item>
         <item>10 x 10</item>
     </string-array>
+
+    <!-- game -->
+    <string name="game_btn_reiniciar">Reiniciar</string>
+    <string name="updater_restantes">Barcos restantes: %1$d</string>
+    <string name="updater_movimientos">Movimientos: %1$d</string>
+    <string name="updater_aciertos">Aciertos: %1$d</string>
+    <string name="updater_tocado">¡Tocado!</string>
+    <string name="updater_agua">¡Agua!</string>
+    <string name="updater_victoria">¡Victoria!🥳🎉 ganaste en %1$d movimientos. Encontraste %2$d barcos y %3$d olitas</string>
+    <string name="emoji_barco">🛳</string>
+    <string name="emoji_agua">🌊</string>
+
+    <!-- help -->
+    <string name="help_title">¡Bienvenido a Mini Batalla Naval!</string>
+    <string name="help_introduction_header">¡Prepárate para la Estrategia!</string>
+    <string name="help_introduction_text">Esta es la versión individual del clásico Batalla Naval</string>
+
+    <string name="help_objective_header">🎯 Tu Objetivo</string>
+    <string name="help_objective_text">Descubre la ubicación de todos los barcos enemigos en la menor cantidad de movimientos. ¡Cada jugada es crucial para alcanzar la victoria y batir tu propio récord!</string>
+
+    <string name="help_how_to_play_header">💧¿Cómo Jugar?</string>
+    <string name="help_how_to_play_text">
+        1. <b>Elige tu Desafío:</b> Comienza seleccionando una dificultad: 6x6, 8x8 o 10x10. Estas definen el tamaño del tablero y el número de barcos.\n
+        2. <b>Explora el Océano:</b> ¡Si no es barco te mojas!.\n
+        3. <b>Reporte de Batalla:</b>\n
+           • <font color='#FF9800'><b>¡TOCADO!</b></font> (🛳): ¡Has alcanzado un barco! Sigue explorando las casillas cercanas.\n
+           • <font color='#03A9F4'><b>¡AGUA!</b></font> (🌊): Solo había mar. ¡Ajusta tu mira y sigue intentándolo!\n
+    </string>
+    <string name="help_winning_header">🏆 ¡Victoria y Gloria!</string>
+    <string name="help_winning_text">La partida finaliza cuando todos los barcos enemigos hayan sido descubiertos. ¡Celebra tu triunfo y esfuérzate por mejorar tu puntuación en cada partida!</string>
+
+    <string name="help_good_luck">¡Que los vientos te sean favorables, Capitán!</string>
+    <string name="help_button_back">Volver</string>
+
 </resources>
