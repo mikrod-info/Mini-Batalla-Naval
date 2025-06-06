@@ -76,7 +76,6 @@ class UpdaterTextView(
         actualizarVistaMensajeJuego()
 
         if (esVictoria()) {
-            reiniciarStrings()
             informarVictoria()
             this.gameEventListener.onGameWon()
         }
@@ -111,13 +110,6 @@ class UpdaterTextView(
 
     private fun esVictoria(): Boolean {
         return this.valorAciertos == this.cantidadBarcos
-    }
-
-    private fun reiniciarStrings() {
-        this.tvRestantes.text = ""
-        this.tvMovimientos.text = ""
-        this.tvAciertos.text = ""
-        this.tvMensajeJuego.text = ""
     }
 
     private fun informarVictoria(){

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mini_Battleship</string>
+    <string name="main_titulo">Mini Battleship</string>
+    <string name="main_ingresarNombre">Enter your name</string>
+    <string name="main_ingresarDificultad">Select difficulty</string>
+    <string name="main_hintNombre">Tina Torpedo</string>
+    <string name="main_jugar">Let\'s Play!</string>
+    <string name="game_btn_reiniciar">🔄 Reset</string>
+    <string name="game_btn_menu">Options menu</string>
+    <string name="updater_restantes">Ships left: %1$d</string>
+    <string name="updater_movimientos">Moves: %1$d</string>
+    <string name="main_btn_help">Help button</string>
+    <string name="updater_aciertos">Hits: %1$d</string>
+    <string name="updater_tocado">Hit!</string>
+    <string name="updater_agua">Missed!</string>
+    <string name="updater_victoria">Victory! 🥳🎉 you won with %1$d moves. You found %2$d ships and %3$d splashes!</string>
+    <string name="game_menu_popup_help">ℹ️ About the game</string>
+    <string name="help_title">Welcome to Mini Battleship</string>
+    <string name="help_introduction_header">Are you ready to get splashed?</string>
+    <string name="help_introduction_text">This is a single-player mini version of the classic Battleship</string>
+    <string name="help_objective_header">🎯 The goal</string>
+    <string name="help_objective_text">Locate every enemy ship in the fewest moves possible. Each move is crucial for victory and beat your own record!</string>
+    <string name="help_how_to_play_header">💧 How to play?</string>
+    <string name="help_how_to_play_text">
+        1. <b>Choose your challenge:</b>\n
+            Begin selecting your difficulty: 6x6, 8x8, or 10x10. This defines the size of the board and the number of ships.\n
+        2. <b>Explore the ocean:</b>\n
+            If it\'s not a ship, you\'re just floating!.\n
+        3. <b>Battle report:</b>\n
+           • <font color='#FF9800'><b>HIT!</b></font> (🛳): You just found a ship! Continue exploring the board.\n
+           • <font color='#03A9F4'><b>SPLASH!</b></font> (🌊): There was just water. Adjust your aim and keep trying!\n
+    </string>
+    <string name="help_winning_header">🏆 Victory and Glory! 🎉🤘</string>
+    <string name="help_winning_text">The game ends when all ships have been found. Celebrate the triumph and work towards improving your score each game!</string>
+    <string name="help_good_luck">May the winds be in your favor, Captain!</string>
+    <string name="help_button_back">← Back</string>
+    <string name="game_menu_popup_inicio">🏠 Home</string>
+</resources>
