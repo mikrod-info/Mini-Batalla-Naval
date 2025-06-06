@@ -5,37 +5,38 @@
     android:id="@+id/mainHelpLayoutLandscape"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="32dp"
     tools:context=".HelpActivity">
+
+    <!-- Título y botón de retroceso -->
 
     <TextView
         android:id="@+id/tvHelpTitle"
         style="@style/estilo_titulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/help_title"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_help"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.35" />
 
     <Button
         android:id="@+id/btnHelpBack"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
+        android:paddingHorizontal="64dp"
+        android:paddingVertical="8dp"
         android:text="@string/help_button_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_help"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"  />
+
+    <!-- Texto -->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_help"
@@ -43,7 +44,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.35" />
-    <!-- Ajusta este porcentaje según prefieras la división -->
 
     <ScrollView
         android:id="@+id/scrollViewExplanation"
@@ -64,7 +64,6 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <!-- Los mismos TextViews que en la versión portrait -->
             <TextView
                 android:id="@+id/tvHelpIntroHeader"
                 style="@style/estilo_subtitulo_ayuda"

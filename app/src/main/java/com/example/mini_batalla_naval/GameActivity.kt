@@ -16,7 +16,6 @@ import androidx.appcompat.widget.PopupMenu
 import com.example.mini_batalla_naval.model.BotonVisualEstado
 import com.example.mini_batalla_naval.model.JuegoEstado
 
-//Grupo1: Kruk, Ivana y Rodriguez, Miguel
 class GameActivity : AppCompatActivity(), GameEventListener {
     private lateinit var glTablero: GridLayout
     private lateinit var tableroLogico: Tablero
@@ -30,12 +29,14 @@ class GameActivity : AppCompatActivity(), GameEventListener {
     private val KEY_JUEGO_ESTADO = "KEY_JUEGO_ESTADO"
     private var juegoTerminado: Boolean = false
     private var dimensionRecibida: Int = 6
+    private var nombreJugador: String = "Anónimo"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
         this.dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
+        this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: "Anónimo"
 
         if (savedInstanceState != null) {
 
@@ -217,11 +218,10 @@ class GameActivity : AppCompatActivity(), GameEventListener {
                     //control de ejecución de evento. Esto impide que se ejecute más de una vez.
                     if (this.juegoTerminado || !it.isEnabled) return@setOnClickListener
 
-                    val fueAcierto = this.tableroLogico.fueAcierto(i, j)
                     if (it.isEnabled) {
-                        val esAcierto = this.tableroLogico.fueAcierto(i,j)
-                        boton.text = if (esAcierto) emojiBarco else emojiAgua
-                        updater.registrarActividad(esAcierto)
+                        val fueAcierto = this.tableroLogico.fueAcierto(i,j)
+                        boton.text = if (fueAcierto) emojiBarco else emojiAgua
+                        updater.registrarActividad(fueAcierto)
                         it.isEnabled = false
                     }
                 }

@@ -5,7 +5,7 @@
     android:id="@+id/mainHelpLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="32dp"
     tools:context=".HelpActivity">
 
     <TextView
@@ -38,7 +38,6 @@
             android:orientation="vertical"
             android:paddingStart="8dp"
             android:paddingEnd="8dp">
-            <!-- Padding horizontal interno para el contenido del ScrollView -->
 
             <TextView
                 android:id="@+id/tvHelpIntroHeader"
@@ -113,7 +112,7 @@
                 android:textAlignment="center"
                 android:textStyle="italic"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"/> <!-- Margen inferior para el final del scroll -->
+                android:layout_marginBottom="8dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/opInicio"
-        android:title="Inicio" />
+        android:title="@string/game_menu_popup_inicio" />
     <item
         android:id="@+id/opAyuda"
-        android:title="Ayuda" />
+        android:title="@string/game_menu_popup_help" />
 </menu>

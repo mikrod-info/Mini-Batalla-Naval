@@ -4,22 +4,25 @@
     android:id="@+id/main_game_container_land"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="32dp"
     tools:context=".GameActivity">
 
-    <!-- Columna Izquierda para Información y Menú -->
+    <!-- Información y Menú -->
 
+    <!-- Tablero y menú de opciones -->
 
     <LinearLayout
         android:id="@+id/llInfoMenu"
-        android:layout_width="259dp"
-        android:layout_height="231dp"
+        android:layout_width="176dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/llMensajeJuego"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVerticalGame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
         app:layout_constraintWidth_percent="0.3">
 
         <TextView
@@ -27,67 +30,78 @@
             style="@style/estilo_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:minWidth="100dp" />
 
         <TextView
             android:id="@+id/tvMovimientos"
             style="@style/estilo_text_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:minWidth="100dp" />
 
         <TextView
             android:id="@+id/tvAciertos"
             style="@style/estilo_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:minWidth="100dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llMensajeJuego"
+        android:layout_width="174dp"
+        android:layout_height="131dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnReiniciar"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerticalGame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llInfoMenu">
 
         <TextView
             android:id="@+id/tvMensajeJuego"
             style="@style/estilo_text_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/btnReiniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:paddingHorizontal="64dp"
         android:paddingVertical="8dp"
         android:text="@string/game_btn_reiniciar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVerticalGame"
-        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llInfoMenu" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVerticalGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" /> <!-- Ajusta este porcentaje según veas necesario -->
-
-
-    <!-- Columna Derecha para Tablero y Reinicio -->
-    <!-- app:layout_constraintDimensionRatio="1:1" ayuda a mantener el tablero cuadrado si es deseable -->
-    <!-- Si el tablero no tiene que ser cuadrado, ajusta las restricciones de alto -->
+        app:layout_constraintGuide_percent="0.35" />
 
     <GridLayout
         android:id="@+id/glTablero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="431dp"
+        android:layout_height="339dp"
         android:alignmentMode="alignMargins"
         android:minWidth="444dp"
         android:minHeight="333dp"
         android:useDefaultMargins="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineVerticalGame"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,8 +111,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|top"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="menu hamburguesa"
+        android:contentDescription="@string/game_btn_menu"
         android:src="@drawable/ic_burger_menu"
+        app:tint="@color/colorPrimario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

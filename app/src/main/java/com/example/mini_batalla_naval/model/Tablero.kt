@@ -82,7 +82,7 @@ class Tablero(
     private fun cargarBarcos() {
         var barcosCargados = 0
         while (barcosCargados < this.cantidadBarcos) {
-            //el rango acá es de [0,5] en matriz de 6*6
+            //si la matriz de 6*6, el rango es [0,5]
             //((Math.random() * (5-0+1 = 6)) + 0)
             val filaRandom = randomEnRango(0, this.filas - 1)
             val columnaRandom = randomEnRango(0, this.columnas - 1)

@@ -6,19 +6,19 @@
   <path
       android:pathData="M4,18L20,18"
       android:strokeWidth="2"
-      android:fillColor="@android:color/transparent"
+      android:fillColor="?attr/colorControlNormal"
       android:strokeColor="#000000"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M4,12L20,12"
       android:strokeWidth="2"
-      android:fillColor="@android:color/transparent"
+      android:fillColor="?attr/colorControlNormal"
       android:strokeColor="#000000"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M4,6L20,6"
       android:strokeWidth="2"
-      android:fillColor="@android:color/transparent"
+      android:fillColor="?attr/colorControlNormal"
       android:strokeColor="#000000"
       android:strokeLineCap="round"/>
 </vector>

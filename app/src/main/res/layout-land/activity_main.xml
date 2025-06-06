@@ -8,13 +8,16 @@
     android:padding="32dp"
     tools:context=".MainActivity">
 
+    <!-- Título y botón de ayuda -->
+
     <ImageButton
         android:id="@+id/btnMainHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="Botón de menú ayuda"
-        android:src="@drawable/ic_help_btn"
+        android:contentDescription="@string/main_btn_help"
+        android:src="@drawable/ic_info_btn"
+        app:tint="@color/colorPrimario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,14 +30,13 @@
         android:text="@string/main_titulo"
         android:textAlignment="center"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineCenterVertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnMainHelp"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
-    <!-- Guía vertical para dividir la pantalla o ayudar a posicionar grupos -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCenterVertical"
         android:layout_width="wrap_content"
@@ -42,7 +44,9 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <!-- Grupo de Inputs a la izquierda (o arriba en la mitad izquierda) -->
+    <!-- Grupo de Inputs -->
+    <!-- Input nombre -->
+
     <TextView
         android:id="@+id/textViewLabelNombre"
         style="@style/estilo_text_view"
@@ -51,20 +55,22 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="8dp"
         android:text="@string/main_ingresarNombre"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNombre"
-        app:layout_constraintEnd_toStartOf="@+id/editTextNombre"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@+id/etNombre"
+        app:layout_constraintEnd_toStartOf="@+id/etNombre"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNombre" />
+        app:layout_constraintTop_toTopOf="@+id/etNombre" />
+
+    <!-- Input dificultad -->
 
     <EditText
-        android:id="@+id/editTextNombre"
+        android:id="@+id/etNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:autofillHints="username"
         android:hint="@string/main_hintNombre"
         android:inputType="textPersonName"
+        android:maxWidth="488dp"
         android:minHeight="48dp"
         android:textColorHint="@color/colorHint"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,12 +92,12 @@
         android:text="@string/main_ingresarDificultad"
         app:layout_constraintBottom_toBottomOf="@+id/spinner"
         app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/spinner" />
 
-    <!-- Botón Jugar a la derecha (o abajo en la mitad derecha) -->
+    <!-- Botón Jugar-->
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="0dp"
@@ -103,7 +109,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineCenterVertical"
         app:layout_constraintStart_toEndOf="@+id/textViewLabelDificultad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/btnJugar"
@@ -119,6 +125,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guidelineCenterVertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintVertical_bias="0.7"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
