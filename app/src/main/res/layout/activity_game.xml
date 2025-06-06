@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="*"
+    android:layout_margin="20dp"
     android:padding="30dp"
-    android:layout_margin="20dp">
-    <TableRow>
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/estilo_titulo"
-            />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:id="@+id/tvRestantes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/estilo_text_view"
-            />
-    </TableRow>
+    android:stretchColumns="*">
 
     <TableRow
-        android:layout_marginBottom="8dp"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/btnMainHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="menu hamburguesa"
+            android:src="@drawable/ic_burger_menu" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tvRestantes"
+            style="@style/estilo_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow android:layout_marginBottom="8dp">
+
         <TextView
             android:id="@+id/tvMovimientos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             style="@style/estilo_text_view"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/tvAciertos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             style="@style/estilo_text_view"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </TableRow>
 
     <GridLayout
@@ -48,52 +53,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:useDefaultMargins="true"
         android:alignmentMode="alignMargins"
-        >
-    </GridLayout>
+        android:useDefaultMargins="true" />
 
-    <TableRow
-        android:layout_marginTop="16dp"
-        >
+    <TableRow android:layout_marginTop="16dp">
+
         <TextView
             android:id="@+id/tvMensajeJuego"
+            style="@style/estilo_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textAlignment="center"
-            style="@style/estilo_text_view"
-            />
+            android:textAlignment="center" />
     </TableRow>
 
-    <LinearLayout
-        android:gravity="center_horizontal"
-        >
+    <LinearLayout android:gravity="center_horizontal">
+
         <Button
-            android:id="@+id/bReiniciar"
+            android:id="@+id/btnReiniciar"
+            style="@style/estilo_boton_reiniciar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
-            style="@style/estilo_boton_reiniciar"
-            />
+            android:text="-" />
     </LinearLayout>
 
-
-    <TableRow
-        android:layout_marginTop="8dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_span="1">
-            <Button
-            android:id="@+id/buttonOpenHelpFromMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ayuda"
-            style="@style/estilo_boton_reiniciar"
-            />
-        </LinearLayout>
-    </TableRow>
 
 </TableLayout>
