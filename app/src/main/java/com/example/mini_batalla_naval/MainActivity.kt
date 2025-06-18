@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSpinner() {
         spinner = this.findViewById<Spinner>(R.id.spinner)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,

@@ -10,8 +10,8 @@ class Tablero(
     init {
         //random para rango de [10, 15].
         //((Math.random() * (15-10+1 = 6)) + 10)
-        val (minBarcos, maxBarcos) = determinarRangoBarcos(filas)
-        this.cantidadBarcos = randomEnRango(minBarcos, maxBarcos)
+        //val (minBarcos, maxBarcos) = determinarRangoBarcos(filas)
+        this.cantidadBarcos = randomEnRango(10, 15)
         //inicializa la matriz de celdas. al no pasar parámetros, se inicializa con celdas con valor false.
         celdas = Array(this.filas) { Array(this.columnas) { Celda() } }
         cargarBarcos()
@@ -65,14 +65,14 @@ class Tablero(
     }
 
     //métodos auxiliares
-    private fun determinarRangoBarcos(filas: Int): Pair<Int, Int> {
-        return when (filas) {
-            6 -> Pair(10, 15)
-            8 -> Pair(20, 35)
-            10 -> Pair(30, 45)
-            else -> Pair(10, 15)
-        }
-    }
+//    private fun determinarRangoBarcos(filas: Int): Pair<Int, Int> {
+//        return when (filas) {
+//            6 -> Pair(10, 15)
+//            8 -> Pair(20, 35)
+//            10 -> Pair(30, 45)
+//            else -> Pair(10, 15)
+//        }
+//    }
 
     private fun randomEnRango(min: Int, max: Int): Int {
         //fórmula para retornar un valor random en rango [A,B]: (Math.random() * (B-A+1)) + A)
