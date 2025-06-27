@@ -116,5 +116,7 @@ class UpdaterTextView(
         this.strMensajeJuego = String.format(this.strMensajeVictoria, this.valorMovimientos, this.valorAciertos, this.valorFallos)
         actualizarVistaMensajeJuego()
     }
-
+    fun getResumen(): String {
+        return "Movimientos: $valorMovimientos"
+    }
 }

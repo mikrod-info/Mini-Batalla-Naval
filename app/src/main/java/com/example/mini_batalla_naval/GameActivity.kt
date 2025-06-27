@@ -10,8 +10,10 @@ import com.example.mini_batalla_naval.model.Tablero
 import com.example.mini_batalla_naval.model.GameEventListener
 import android.content.Intent
 import android.os.Build
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.ImageButton
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import com.example.mini_batalla_naval.model.BotonVisualEstado
 import com.example.mini_batalla_naval.model.JuegoEstado
@@ -26,10 +28,16 @@ class GameActivity : AppCompatActivity(), GameEventListener {
     private lateinit var tvMensajeJuego: TextView
     private lateinit var btnReiniciar: Button
     private lateinit var btnShowPopup: ImageButton
+    private lateinit var tvTiempoRestante: TextView
+
     private val KEY_JUEGO_ESTADO = "KEY_JUEGO_ESTADO"
     private var juegoTerminado: Boolean = false
     private var dimensionRecibida: Int = 6
     private var nombreJugador: String = "Anónimo"
+
+    private var countDownTimer: CountDownTimer? = null
+    private var tiempoTotalSegundos = 20
+    private var segundosRestantes = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +45,15 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
         this.dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
         this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: "Anónimo"
+
+        tiempoTotalSegundos = when(dimensionRecibida) {
+            6 -> 20
+            8 -> 25
+            10 -> 30
+            else -> 20
+        }
+        segundosRestantes = tiempoTotalSegundos
+
 
         if (savedInstanceState != null) {
 
@@ -93,6 +110,9 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         inicializarVistas()
         crearBotonesListeners()
         setupTablero()
+        tvTiempoRestante.text = "Tiempo: ${segundosRestantes}s"
+        iniciarTemporizador()
+
     }
 
     private fun inicializarVistas() {
@@ -103,6 +123,8 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         this.tvMensajeJuego = findViewById<TextView>(R.id.tvMensajeJuego)
         this.btnReiniciar = findViewById<Button>(R.id.btnReiniciar)
         this.btnShowPopup = findViewById<ImageButton>(R.id.btnMainHelp)
+
+        this.tvTiempoRestante = findViewById(R.id.tvTiempoRestante)
     }
 
     private fun setupTablero() {
@@ -268,13 +290,60 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         popup.show()
     }
 
+    private fun iniciarTemporizador() {
+        countDownTimer?.cancel()
+        tvTiempoRestante.text = "Tiempo: ${segundosRestantes}s" // ← Mostrar antes de que empiece
+
+        countDownTimer = object : CountDownTimer(tiempoTotalSegundos * 1000L, 1000L) {
+            override fun onTick(millisUntilFinished: Long) {
+                segundosRestantes = (millisUntilFinished / 1000).toInt()
+                tvTiempoRestante.text = "Tiempo: ${segundosRestantes}s"
+            }
+
+            override fun onFinish() {
+                if (!juegoTerminado) {
+                    juegoTerminado = true
+                    deshabilitarTablero()
+                    mostrarDialogoDerrota()
+                }
+            }
+        }.start()
+    }
+
+
+    private fun mostrarDialogoVictoria(segundosUsados: Int) {
+        val resumen = updater.getResumen()
+        AlertDialog.Builder(this@GameActivity)
+            .setTitle("🎉 ¡Ganaste!")
+            .setMessage("$resumen\nTiempo usado: ${segundosUsados}s")
+            .setPositiveButton("Jugar de nuevo") { _, _ -> onGameRestart() }
+            .setNegativeButton("Ir a Inicio") { _, _ -> finish() }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun mostrarDialogoDerrota() {
+        AlertDialog.Builder(this@GameActivity)
+            .setTitle("⏱ Tiempo agotado")
+            .setMessage("No lograste encontrar todos los barcos a tiempo.")
+            .setPositiveButton("Intentar de nuevo") { _, _ -> onGameRestart() }
+            .setNegativeButton("Salir") { _, _ -> finish() }
+            .setCancelable(false)
+            .show()
+    }
+
     override fun onGameWon() {
-        this.juegoTerminado = true
+        juegoTerminado = true
+        countDownTimer?.cancel()
         deshabilitarTablero()
+        val tiempoUsado = tiempoTotalSegundos - segundosRestantes
+        mostrarDialogoVictoria(tiempoUsado)
     }
 
     override fun onGameRestart() {
-        this.juegoTerminado = false
+        juegoTerminado = false
         setupTablero()
+        segundosRestantes = tiempoTotalSegundos
+        iniciarTemporizador()
     }
 }
