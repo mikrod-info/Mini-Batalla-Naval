@@ -46,6 +46,15 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         this.dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
         this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: "Anónimo"
 
+        tiempoTotalSegundos = when(dimensionRecibida) {
+            6 -> 20
+            8 -> 25
+            10 -> 30
+            else -> 20
+        }
+        segundosRestantes = tiempoTotalSegundos
+
+
         if (savedInstanceState != null) {
 
             val estadoJuego: JuegoEstado? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -101,6 +110,8 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         inicializarVistas()
         crearBotonesListeners()
         setupTablero()
+        tvTiempoRestante.text = "Tiempo: ${segundosRestantes}s"
+        iniciarTemporizador()
 
     }
 
