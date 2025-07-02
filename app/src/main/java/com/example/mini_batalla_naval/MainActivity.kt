@@ -9,6 +9,7 @@ import android.widget.EditText
 //import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 //Grupo1: Kruk, Ivana y Rodriguez, Miguel
@@ -54,18 +55,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun inicializarVistas() {
         etNombre = this.findViewById<EditText>(R.id.etNombre)
-        this.nombreJugador = etNombre.text.toString()
+
 
         btnJugar = this.findViewById<Button>(R.id.btnJugar)
         btnJugar.setOnClickListener {
-            val intent = Intent(this, GameActivity::class.java).apply {
-                putExtra("DIMENSION_TABLERO", dimensionTablero)
-                putExtra("NOMBRE_JUGADOR", nombreJugador)
+            this.nombreJugador = etNombre.text.toString().trim()
+            if (this.nombreJugador.isEmpty()) {
+                Toast.makeText(this, "Por favor ingrese un nombre", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, GameActivity::class.java).apply {
+                    putExtra("DIMENSION_TABLERO", dimensionTablero)
+                    putExtra("NOMBRE_JUGADOR", nombreJugador)
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
+
         }
 
-        btnHelp = this.findViewById<ImageButton>(R.id.btnMainHelp)
+        btnHelp = this.findViewById<ImageButton>(R.id.btnGameHelp)
         btnHelp.setOnClickListener {
             val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)

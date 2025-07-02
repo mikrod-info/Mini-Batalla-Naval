@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainHelpLayout"
@@ -9,7 +10,7 @@
     tools:context=".HelpActivity">
 
     <TextView
-        android:id="@+id/tvHelpTitle"
+        android:id="@+id/tvHelpTitulo"
         style="@style/estilo_titulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,10 +27,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnHelpBack"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolverHelp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHelpTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvHelpTitulo"
         android:fillViewport="true">
 
         <LinearLayout
@@ -41,7 +42,7 @@
 
             <TextView
                 android:id="@+id/tvHelpIntroHeader"
-                style="@style/estilo_subtitulo_ayuda"
+                style="@style/estilo_subtitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/help_introduction_header"
@@ -57,7 +58,7 @@
 
             <TextView
                 android:id="@+id/tvHelpObjectiveHeader"
-                style="@style/estilo_subtitulo_ayuda"
+                style="@style/estilo_subtitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/help_objective_header"
@@ -73,7 +74,7 @@
 
             <TextView
                 android:id="@+id/tvHelpHowToPlayHeader"
-                style="@style/estilo_subtitulo_ayuda"
+                style="@style/estilo_subtitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/help_how_to_play_header"
@@ -89,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tvHelpWinningHeader"
-                style="@style/estilo_subtitulo_ayuda"
+                style="@style/estilo_subtitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/help_winning_header"
@@ -118,11 +119,11 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnHelpBack"
+        android:id="@+id/btnVolverHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="@string/help_button_back"
+        android:text="@string/button_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

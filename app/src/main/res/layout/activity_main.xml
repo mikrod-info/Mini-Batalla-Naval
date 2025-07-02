@@ -10,7 +10,7 @@
 
     <!-- Título y botón de ayuda -->
     <ImageButton
-        android:id="@+id/btnMainHelp"
+        android:id="@+id/btnGameHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"

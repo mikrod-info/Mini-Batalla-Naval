@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mini_Battleship</string>
+    <string name="app_name">Mini Battleship</string>
     <string name="main_titulo">Mini Battleship</string>
     <string name="main_ingresarNombre">Enter your name</string>
     <string name="main_ingresarDificultad">Select difficulty</string>
@@ -34,6 +34,7 @@
     <string name="help_winning_header">🏆 Victory and Glory! 🎉🤘</string>
     <string name="help_winning_text">The game ends when all ships have been found. Celebrate the triumph and work towards improving your score each game!</string>
     <string name="help_good_luck">May the winds be in your favor, Captain!</string>
-    <string name="help_button_back">← Back</string>
+    <string name="button_back">← Back</string>
     <string name="game_menu_popup_inicio">🏠 Home</string>
+    <string name="leaderboard_title">🏆 Top 5 players 🏆</string>
 </resources>
