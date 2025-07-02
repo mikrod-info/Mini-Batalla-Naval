@@ -1,6 +1,6 @@
 <resources>
     <!-- main -->
-    <string name="app_name">Mini_Batalla_Naval</string>
+    <string name="app_name">Mini Batalla Naval</string>
     <string name="main_titulo">Mini Batalla Naval</string>
     <string name="main_ingresarNombre">Ingrese nombre</string>
     <string name="main_ingresarDificultad">Seleccione dificultad</string>
@@ -46,6 +46,9 @@
     <string name="help_winning_header">🏆 ¡Victoria y Gloria! 🎉🤘</string>
     <string name="help_winning_text">La partida finaliza cuando todos los barcos enemigos hayan sido descubiertos. ¡Celebrá el triunfo y esforzate por mejorar tu puntuación en cada partida!</string>
     <string name="help_good_luck">¡Que los vientos te sean favorables, Capitán!</string>
-    <string name="help_button_back">← Volver</string>
+    <string name="button_back">← Volver</string>
+
+    <!-- leaderboard -->
+    <string name="leaderboard_title">🏆 Los 5 mejores jugadores 🏆</string>
 
 </resources>

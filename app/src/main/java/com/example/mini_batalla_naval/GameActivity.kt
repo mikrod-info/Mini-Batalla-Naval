@@ -26,9 +26,10 @@ class GameActivity : AppCompatActivity(), GameEventListener {
     private lateinit var tvMovimientos: TextView
     private lateinit var tvAciertos: TextView
     private lateinit var tvMensajeJuego: TextView
+    private lateinit var tvTiempoRestante: TextView
+    private lateinit var tvNombreJugador: TextView
     private lateinit var btnReiniciar: Button
     private lateinit var btnShowPopup: ImageButton
-    private lateinit var tvTiempoRestante: TextView
 
     private val KEY_JUEGO_ESTADO = "KEY_JUEGO_ESTADO"
     private var juegoTerminado: Boolean = false
@@ -43,10 +44,11 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        // Captura datos del Intent de MainActivity
         this.dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
         this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: "Anónimo"
 
-        tiempoTotalSegundos = when(dimensionRecibida) {
+        tiempoTotalSegundos = when (dimensionRecibida) {
             6 -> 20
             8 -> 25
             10 -> 30
@@ -57,12 +59,13 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
         if (savedInstanceState != null) {
 
-            val estadoJuego: JuegoEstado? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                savedInstanceState.getParcelable(KEY_JUEGO_ESTADO, JuegoEstado::class.java)
-            } else {
-                @Suppress("DEPRECATION") // Suprime la advertencia para versiones anteriores a API 33
-                savedInstanceState.getParcelable<JuegoEstado>(KEY_JUEGO_ESTADO)
-            }
+            val estadoJuego: JuegoEstado? =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    savedInstanceState.getParcelable(KEY_JUEGO_ESTADO, JuegoEstado::class.java)
+                } else {
+                    @Suppress("DEPRECATION") // Suprime la advertencia para versiones anteriores a API 33
+                    savedInstanceState.getParcelable<JuegoEstado>(KEY_JUEGO_ESTADO)
+                }
 
             if (estadoJuego != null) {
                 this.juegoTerminado = estadoJuego.juegoTerminadoData
@@ -91,7 +94,12 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         val estadoTableroVisual = ArrayList<BotonVisualEstado>()
         for (i in 0 until this.glTablero.childCount) {
             val botonView = this.glTablero.getChildAt(i) as Button
-            estadoTableroVisual.add(BotonVisualEstado(botonView.isEnabled, botonView.text.toString()))
+            estadoTableroVisual.add(
+                BotonVisualEstado(
+                    botonView.isEnabled,
+                    botonView.text.toString()
+                )
+            )
 
         }
 
@@ -121,13 +129,15 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         this.tvMovimientos = findViewById<TextView>(R.id.tvMovimientos)
         this.tvAciertos = findViewById<TextView>(R.id.tvAciertos)
         this.tvMensajeJuego = findViewById<TextView>(R.id.tvMensajeJuego)
-        this.btnReiniciar = findViewById<Button>(R.id.btnReiniciar)
-        this.btnShowPopup = findViewById<ImageButton>(R.id.btnMainHelp)
+        this.tvNombreJugador = findViewById<TextView>(R.id.tvNombreJugador)
+        this.tvTiempoRestante = findViewById<TextView>(R.id.tvTiempoRestante)
 
-        this.tvTiempoRestante = findViewById(R.id.tvTiempoRestante)
+        this.btnReiniciar = findViewById<Button>(R.id.btnReiniciar)
+        this.btnShowPopup = findViewById<ImageButton>(R.id.btnGameHelp)
     }
 
     private fun setupTablero() {
+        this.tvNombreJugador.text = "Capitán ${this.nombreJugador}"
         this.tableroLogico = Tablero(dimensionRecibida, dimensionRecibida)
         this.updater = UpdaterTextView(
             this,
@@ -190,7 +200,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
                     val fueAcierto = this.tableroLogico.fueAcierto(i, j)
                     boton.text = if (fueAcierto) emojiBarco else emojiAgua
-                    if (fueAcierto) this.tableroLogico.revelarBarco(i,j)
+                    if (fueAcierto) this.tableroLogico.revelarBarco(i, j)
                     updater.registrarActividad(fueAcierto)
                     it.isEnabled = false
                 }
@@ -241,7 +251,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
                     if (this.juegoTerminado || !it.isEnabled) return@setOnClickListener
 
                     if (it.isEnabled) {
-                        val fueAcierto = this.tableroLogico.fueAcierto(i,j)
+                        val fueAcierto = this.tableroLogico.fueAcierto(i, j)
                         boton.text = if (fueAcierto) emojiBarco else emojiAgua
                         updater.registrarActividad(fueAcierto)
                         it.isEnabled = false
@@ -270,9 +280,6 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.opInicio -> {
-                    // Acción para "Inicio": Volver a MainActivity
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
                     finish()
                     true
                 }
@@ -303,21 +310,21 @@ class GameActivity : AppCompatActivity(), GameEventListener {
             override fun onFinish() {
                 if (!juegoTerminado) {
                     juegoTerminado = true
-                    deshabilitarTablero()
-                    mostrarDialogoDerrota()
+                    onGameOver()
                 }
             }
         }.start()
     }
 
-
-    private fun mostrarDialogoVictoria(segundosUsados: Int) {
-        val resumen = updater.getResumen()
+    //Diálogos victoria/derrota
+    private fun mostrarDialogoVictoria() {
+        val movimientos = this.updater.getMovimientos()
+        val aciertos = this.updater.getAciertos()
         AlertDialog.Builder(this@GameActivity)
             .setTitle("🎉 ¡Ganaste!")
-            .setMessage("$resumen\nTiempo usado: ${segundosUsados}s")
-            .setPositiveButton("Jugar de nuevo") { _, _ -> onGameRestart() }
-            .setNegativeButton("Ir a Inicio") { _, _ -> finish() }
+            .setMessage("Encontraste todos los barcos a tiempo!")
+            .setPositiveButton("¡Jugar de nuevo!") { _, _ -> onGameRestart() }
+            .setNegativeButton("¡Ver ranking!") { _, _ -> irLeaderboard(aciertos, movimientos) }
             .setCancelable(false)
             .show()
     }
@@ -326,18 +333,26 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         AlertDialog.Builder(this@GameActivity)
             .setTitle("⏱ Tiempo agotado")
             .setMessage("No lograste encontrar todos los barcos a tiempo.")
-            .setPositiveButton("Intentar de nuevo") { _, _ -> onGameRestart() }
-            .setNegativeButton("Salir") { _, _ -> finish() }
+            .setPositiveButton("¡Intentar de nuevo!") { _, _ -> onGameRestart() }
+            .setNegativeButton("Volver a Inicio") { _, _ -> finish() }
             .setCancelable(false)
             .show()
     }
 
+    fun irLeaderboard(aciertos: Int, movimientos: Int) {
+        val intent = Intent(this, LeaderboardActivity::class.java)
+        intent.putExtra("NOMBRE_JUGADOR", nombreJugador)
+        intent.putExtra("ACIERTOS", aciertos)
+        intent.putExtra("MOVIMIENTOS", movimientos)
+        startActivity(intent)
+    }
+
+    // Implementaciones de la interfaz GameEventListener
     override fun onGameWon() {
         juegoTerminado = true
         countDownTimer?.cancel()
         deshabilitarTablero()
-        val tiempoUsado = tiempoTotalSegundos - segundosRestantes
-        mostrarDialogoVictoria(tiempoUsado)
+        mostrarDialogoVictoria()
     }
 
     override fun onGameRestart() {
@@ -345,5 +360,12 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         setupTablero()
         segundosRestantes = tiempoTotalSegundos
         iniciarTemporizador()
+    }
+
+    override fun onGameOver() {
+        this.juegoTerminado = true
+        countDownTimer?.cancel()
+        deshabilitarTablero()
+        mostrarDialogoDerrota()
     }
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".LeaderboardActivity">
+
+    <TextView
+        android:id="@+id/tvLeaderboardTitulo"
+        style="@style/estilo_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/leaderboard_title"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <!-- Guideline vertical para dividir la pantalla -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <!-- Lista de leadeboard -->
+    <LinearLayout
+        android:id="@+id/llLeaderboardList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvRank1"
+            style="@style/estilo_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/tvRank2"
+            style="@style/estilo_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/tvRank3"
+            style="@style/estilo_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/tvRank4"
+            style="@style/estilo_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="" />
+
+        <TextView
+            android:id="@+id/tvRank5"
+            style="@style/estilo_subtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            tools:text="" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="🤯😎🥳"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolverLeaderboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_center"
+        app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo" />
+
+
+    <Button
+        android:id="@+id/btnVolverLeaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="64dp"
+        android:paddingVertical="8dp"
+        android:text="@string/button_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_center"
+        app:layout_constraintVertical_bias="1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
