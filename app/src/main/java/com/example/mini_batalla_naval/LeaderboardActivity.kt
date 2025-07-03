@@ -5,7 +5,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mini_batalla_naval.model.LeaderboardTextView.mostrarLeaderboard
-import com.example.mini_batalla_naval.model.LeaderboardTextView.actualizarLeaderboard
 import com.example.mini_batalla_naval.model.Puntuacion
 
 class LeaderboardActivity : AppCompatActivity() {
@@ -52,7 +51,6 @@ class LeaderboardActivity : AppCompatActivity() {
                 this.tvRank5
             )
 
-        actualizarLeaderboard(this,this.ultimaPuntuacion)
         mostrarLeaderboard(this, listaTextView)
 
     }

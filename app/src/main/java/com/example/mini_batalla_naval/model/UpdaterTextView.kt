@@ -123,10 +123,6 @@ class UpdaterTextView(
         return this.valorAciertos
     }
 
-    fun getDimensionTablero(): Int {
-        return this.cantidadBarcos
-    }
-
     fun getCantidadBarcos(): Int {
         return this.cantidadBarcos
     }
