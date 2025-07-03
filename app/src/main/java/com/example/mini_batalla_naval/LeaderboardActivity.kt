@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mini_batalla_naval.model.LeaderboardTextView.mostrarLeaderboard
 import com.example.mini_batalla_naval.model.LeaderboardTextView.actualizarLeaderboard
+import com.example.mini_batalla_naval.model.Puntuacion
 
 class LeaderboardActivity : AppCompatActivity() {
     private lateinit var btnVolverLeaderboard: Button
@@ -15,17 +16,29 @@ class LeaderboardActivity : AppCompatActivity() {
     private lateinit var tvRank3: TextView
     private lateinit var tvRank4: TextView
     private lateinit var tvRank5: TextView
+    private lateinit var ultimaPuntuacion: Puntuacion
     private var nombreJugador: String = ""
     private var aciertos: Int = 0
     private var movimientos: Int = 0
+    private var cantidadBarcos: Int = 0
+    private var dimensionTablero: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_leaderboard)
 
         this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: ""
-        this.movimientos = intent.getIntExtra("MOVIMIENTOS", 0)
         this.aciertos = intent.getIntExtra("ACIERTOS", 0)
+        this.movimientos = intent.getIntExtra("MOVIMIENTOS", 0)
+        this.cantidadBarcos = intent.getIntExtra("CANTIDAD_BARCOS", 0)
+        this.dimensionTablero = intent.getIntExtra("DIMENSION_TABLERO", 0)
+        this.ultimaPuntuacion = Puntuacion(
+            this.nombreJugador,
+            this.aciertos,
+            this.movimientos,
+            this.cantidadBarcos,
+            this.dimensionTablero
+        )
 
         setupViews()
         setupBtnVolverLeaderboard()
@@ -39,9 +52,7 @@ class LeaderboardActivity : AppCompatActivity() {
                 this.tvRank5
             )
 
-        val puntos = movimientos//corregir con función que calcule un ratio con normalización barcos/dimensíon
-
-        actualizarLeaderboard(this, nombreJugador, puntos)
+        actualizarLeaderboard(this,this.ultimaPuntuacion)
         mostrarLeaderboard(this, listaTextView)
 
     }
