@@ -7,26 +7,48 @@ package com.example.mini_batalla_naval.model
  * @property puntos Los puntos obtenidos por el jugador.
  */
 data class Puntuacion(
-    val nombreJugador : String,
-    val puntos : Int
+    private val nombreJugador : String,
+    private val aciertos: Int,
+    private val movimientos: Int,
+    private val cantidadBarcos: Int,
+    private val dimensionTablero: Int
 ) : Comparable<Puntuacion> {
-    /**
-     * Compara esta Puntuacion con otra para fines de ordenación.
-     * El objetivo principal es ordenar por 'puntos' de forma descendente (mayor puntuación primero).
-     * Si los puntos son iguales, se puede usar 'timestamp' para desempatar
-     * (por ejemplo, la puntuación más reciente primero, o la más antigua primero).
-     *
-     * @param other La otra Puntuacion con la que comparar.
-     * @return Un valor negativo si esta Puntuacion es "menor" que 'other' (debería ir después en orden descendente),
-     *         cero si son "iguales" según el criterio principal,
-     *         o un valor positivo si esta Puntuacion es "mayor" que 'other' (debería ir antes en orden descendente).
-     */
-    override fun compareTo(other: Puntuacion): Int {
-        // Comparar por puntos en orden descendente.
-        //    other.puntos.compareTo(this.puntos) logra esto:
-        //    - Si other.puntos > this.puntos, devuelve > 0 (other va antes, o sea, this va después). Correcto para orden descendente de this.
-        //    - Si other.puntos < this.puntos, devuelve < 0 (other va después, o sea, this va antes). Correcto para orden descendente de this.
+    private var puntos : Double = 0.0
 
+    init {
+        val eficiencia = this.aciertos / this.movimientos.toDouble()
+        val dificultad = (this.dimensionTablero * this.dimensionTablero) / this.cantidadBarcos.toDouble()
+        this.puntos = eficiencia * dificultad
+    }
+
+    override fun compareTo(other: Puntuacion): Int {
+        // Si other.puntos > this.puntos, devuelve > 0 (other va antes, o sea, this va después)
+        // Si other.puntos < this.puntos, devuelve < 0 (other va después, o sea, this va antes)
         return other.puntos.compareTo(this.puntos)
     }
+
+    fun getNombreJugador(): String {
+        return this.nombreJugador
+    }
+
+    fun getAciertos(): Int {
+        return this.aciertos
+    }
+
+    fun getMovimientos(): Int {
+        return this.movimientos
+    }
+
+    fun getPuntos(): Double {
+        return this.puntos
+    }
+
+    fun getCantidadBarcos(): Int {
+        return this.cantidadBarcos
+    }
+
+    fun getDimensionTablero(): Int {
+        return this.dimensionTablero
+    }
+
 }

@@ -40,8 +40,8 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:textAlignment="center"
-            android:textSize="32sp"
-            tools:text="aaa"
+            android:textSize="16sp"
+            tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
@@ -53,8 +53,8 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:textAlignment="center"
-            android:textSize="32sp"
-            tools:text="aaa"
+            android:textSize="16sp"
+            tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
@@ -66,7 +66,7 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="16sp"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
@@ -79,7 +79,7 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="16sp"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
@@ -92,7 +92,7 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="16sp"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />

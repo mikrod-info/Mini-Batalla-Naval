@@ -17,6 +17,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import com.example.mini_batalla_naval.model.BotonVisualEstado
 import com.example.mini_batalla_naval.model.JuegoEstado
+import com.example.mini_batalla_naval.model.LeaderboardManager
+import com.example.mini_batalla_naval.model.Puntuacion
 
 class GameActivity : AppCompatActivity(), GameEventListener {
     private lateinit var glTablero: GridLayout
@@ -30,6 +32,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
     private lateinit var tvNombreJugador: TextView
     private lateinit var btnReiniciar: Button
     private lateinit var btnShowPopup: ImageButton
+    private lateinit var ultimaPuntuacion: Puntuacion
 
     private val KEY_JUEGO_ESTADO = "KEY_JUEGO_ESTADO"
     private var juegoTerminado: Boolean = false
@@ -51,7 +54,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         tiempoTotalSegundos = when (dimensionRecibida) {
             6 -> 20
             8 -> 25
-            10 -> 30
+            10 -> 60
             else -> 20
         }
         segundosRestantes = tiempoTotalSegundos
@@ -318,13 +321,21 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
     //Diálogos victoria/derrota
     private fun mostrarDialogoVictoria() {
-        val movimientos = this.updater.getMovimientos()
-        val aciertos = this.updater.getAciertos()
         AlertDialog.Builder(this@GameActivity)
             .setTitle("🎉 ¡Ganaste!")
-            .setMessage("Encontraste todos los barcos a tiempo!")
+            .setMessage("Encontraste todos los barcos a tiempo, pero no entraste al Top 5")
+            .setPositiveButton("¡Intentar de nuevo!") { _, _ -> onGameRestart() }
+            .setNegativeButton("¡Ir al inicio!") { _, _ -> finish() }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun mostrarDialogoVictoriaLeaderboard(ultimaPuntuacion: Puntuacion) {
+        AlertDialog.Builder(this@GameActivity)
+            .setTitle("🎉 ¡Ganaste!")
+            .setMessage("Encontraste todos los barcos a tiempo y accediste al ranking!")
             .setPositiveButton("¡Jugar de nuevo!") { _, _ -> onGameRestart() }
-            .setNegativeButton("¡Ver ranking!") { _, _ -> irLeaderboard(aciertos, movimientos) }
+            .setNegativeButton("¡Ver ranking!") { _, _ -> irLeaderboard(ultimaPuntuacion) }
             .setCancelable(false)
             .show()
     }
@@ -339,20 +350,31 @@ class GameActivity : AppCompatActivity(), GameEventListener {
             .show()
     }
 
-    fun irLeaderboard(aciertos: Int, movimientos: Int) {
+    fun irLeaderboard(ultimaPuntuacion: Puntuacion) {
         val intent = Intent(this, LeaderboardActivity::class.java)
-        intent.putExtra("NOMBRE_JUGADOR", nombreJugador)
-        intent.putExtra("ACIERTOS", aciertos)
-        intent.putExtra("MOVIMIENTOS", movimientos)
+        intent.putExtra("NOMBRE_JUGADOR", ultimaPuntuacion.getNombreJugador())
+        intent.putExtra("ACIERTOS", ultimaPuntuacion.getAciertos())
+        intent.putExtra("MOVIMIENTOS", ultimaPuntuacion.getMovimientos())
+        intent.putExtra("CANTIDAD_BARCOS", ultimaPuntuacion.getCantidadBarcos())
+        intent.putExtra("DIMENSION_TABLERO", ultimaPuntuacion.getDimensionTablero())
         startActivity(intent)
     }
 
     // Implementaciones de la interfaz GameEventListener
     override fun onGameWon() {
-        juegoTerminado = true
-        countDownTimer?.cancel()
+        this.ultimaPuntuacion = Puntuacion(
+            this.nombreJugador,
+            this.updater.getAciertos(),
+            this.updater.getMovimientos(),
+            this.updater.getCantidadBarcos(),
+            this.updater.getDimensionTablero()
+        )
+        this.juegoTerminado = true
+        this.countDownTimer?.cancel()
         deshabilitarTablero()
-        mostrarDialogoVictoria()
+        if (LeaderboardManager.entraAlRanking(this, this.ultimaPuntuacion))
+            mostrarDialogoVictoriaLeaderboard(this.ultimaPuntuacion)
+        else mostrarDialogoVictoria()
     }
 
     override fun onGameRestart() {

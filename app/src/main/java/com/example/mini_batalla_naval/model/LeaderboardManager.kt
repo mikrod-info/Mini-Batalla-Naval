@@ -23,19 +23,16 @@ object LeaderboardManager {
         return context.getSharedPreferences(LEADERBOARD_PREFS, Context.MODE_PRIVATE)
     }
 
-    fun guardarPuntuacion(context: Context, nombreJugador: String, puntos: Int) {
+    fun guardarPuntuacion(context: Context, nuevaPuntuacion: Puntuacion) {
         val sharedPreferences = getSharedPreferences(context)
-        val puntuacionActual = obtenerLeaderboard(context).toMutableList()
-        val nuevaPuntuacion = Puntuacion(nombreJugador, puntos)
-        puntuacionActual.add(nuevaPuntuacion)
-        puntuacionActual.sort()
-        val puntuacionesFinales = if (puntuacionActual.size > MAX_ENTRIES) puntuacionActual.subList(0, MAX_ENTRIES) else puntuacionActual
+        val listaPuntuaciones = obtenerLeaderboard(context).toMutableList()
+        listaPuntuaciones.add(nuevaPuntuacion)
+        listaPuntuaciones.sortDescending()
+        val nuevaListaPuntuaciones =
+            if (listaPuntuaciones.size > MAX_ENTRIES) listaPuntuaciones.subList(0, MAX_ENTRIES) else listaPuntuaciones
         sharedPreferences.edit {
-
-            val json = gson.toJson(puntuacionesFinales)
-
+            val json = gson.toJson(nuevaListaPuntuaciones)
             putString(KEY_LEADERBOARD, json)
-
             apply()
         }
     }
@@ -50,6 +47,15 @@ object LeaderboardManager {
         } else {
             emptyList()
         }
+    }
+
+    fun entraAlRanking(context: Context, ultimaPuntuacion: Puntuacion): Boolean {
+        val listaPuntuaciones = obtenerLeaderboard(context)
+
+        if (listaPuntuaciones.isEmpty()) return true
+        if (listaPuntuaciones.size < MAX_ENTRIES) return true
+
+        return ultimaPuntuacion.getPuntos() < listaPuntuaciones.last().getPuntos()
     }
 
 }
