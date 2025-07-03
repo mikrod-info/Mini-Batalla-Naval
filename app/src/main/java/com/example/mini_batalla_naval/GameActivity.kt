@@ -18,6 +18,7 @@ import androidx.appcompat.widget.PopupMenu
 import com.example.mini_batalla_naval.model.BotonVisualEstado
 import com.example.mini_batalla_naval.model.JuegoEstado
 import com.example.mini_batalla_naval.model.LeaderboardManager
+import com.example.mini_batalla_naval.model.LeaderboardTextView.actualizarLeaderboard
 import com.example.mini_batalla_naval.model.Puntuacion
 
 class GameActivity : AppCompatActivity(), GameEventListener {
@@ -36,7 +37,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
     private val KEY_JUEGO_ESTADO = "KEY_JUEGO_ESTADO"
     private var juegoTerminado: Boolean = false
-    private var dimensionRecibida: Int = 6
+    private var dimensionTablero: Int = 6
     private var nombreJugador: String = "Anónimo"
 
     private var countDownTimer: CountDownTimer? = null
@@ -48,10 +49,10 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         setContentView(R.layout.activity_game)
 
         // Captura datos del Intent de MainActivity
-        this.dimensionRecibida = intent.getIntExtra("DIMENSION_TABLERO", 6)
+        this.dimensionTablero = intent.getIntExtra("DIMENSION_TABLERO", 6)
         this.nombreJugador = intent.getStringExtra("NOMBRE_JUGADOR") ?: "Anónimo"
 
-        tiempoTotalSegundos = when (dimensionRecibida) {
+        tiempoTotalSegundos = when (dimensionTablero) {
             6 -> 20
             8 -> 25
             10 -> 60
@@ -72,7 +73,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
             if (estadoJuego != null) {
                 this.juegoTerminado = estadoJuego.juegoTerminadoData
-                this.dimensionRecibida = estadoJuego.dimensionTableroData
+                this.dimensionTablero = estadoJuego.dimensionTableroData
 
                 inicializarJuego()
 
@@ -107,7 +108,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         }
 
         val estadoJuego = JuegoEstado(
-            dimensionTableroData = this.dimensionRecibida,
+            dimensionTableroData = this.dimensionTablero,
             juegoTerminadoData = this.juegoTerminado,
             tableroLogicoData = estadoTablero,
             updaterData = estadoUpdater,
@@ -141,7 +142,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
     private fun setupTablero() {
         this.tvNombreJugador.text = "Capitán ${this.nombreJugador}"
-        this.tableroLogico = Tablero(dimensionRecibida, dimensionRecibida)
+        this.tableroLogico = Tablero(dimensionTablero, dimensionTablero)
         this.updater = UpdaterTextView(
             this,
             this.tvRestantes,
@@ -152,7 +153,7 @@ class GameActivity : AppCompatActivity(), GameEventListener {
             this
         )
 
-        crearTableroVisual(dimensionRecibida, dimensionRecibida)
+        crearTableroVisual(dimensionTablero, dimensionTablero)
     }
 
     private fun crearBotonesListeners() {
@@ -215,10 +216,10 @@ class GameActivity : AppCompatActivity(), GameEventListener {
 
     private fun crearTableroVisualDelEstado(estadoBotones: ArrayList<BotonVisualEstado>) {
         this.glTablero.removeAllViews()
-        this.glTablero.rowCount = this.dimensionRecibida
-        this.glTablero.columnCount = this.dimensionRecibida
+        this.glTablero.rowCount = this.dimensionTablero
+        this.glTablero.columnCount = this.dimensionTablero
 
-        val tamanioEmoji = when (this.dimensionRecibida) {
+        val tamanioEmoji = when (this.dimensionTablero) {
             6 -> 24f
             8 -> 20f
             10 -> 16f
@@ -226,8 +227,8 @@ class GameActivity : AppCompatActivity(), GameEventListener {
         }
 
         var estadoIndex = 0
-        for (i in 0 until this.dimensionRecibida) {
-            for (j in 0 until this.dimensionRecibida) {
+        for (i in 0 until this.dimensionTablero) {
+            for (j in 0 until this.dimensionTablero) {
                 val boton = Button(this, null, 0, R.style.estilo_boton_tablero)
                 val emojiAgua = this.getString(R.string.emoji_agua)
                 val emojiBarco = this.getString(R.string.emoji_barco)
@@ -336,8 +337,31 @@ class GameActivity : AppCompatActivity(), GameEventListener {
             .setMessage("Encontraste todos los barcos a tiempo y accediste al ranking!")
             .setPositiveButton("¡Jugar de nuevo!") { _, _ -> onGameRestart() }
             .setNegativeButton("¡Ver ranking!") { _, _ -> irLeaderboard(ultimaPuntuacion) }
+            .setNeutralButton("Compartir mi puntuación") { _, _ ->
+                compartirPuntuacion(
+                    ultimaPuntuacion
+                )
+            }
             .setCancelable(false)
             .show()
+    }
+
+    private fun compartirPuntuacion(puntuacion: Puntuacion) {
+        val dimension = puntuacion.getDimensionTablero()
+        val texto = """
+        🚢 Mini Batalla Naval
+        🎉 ¡${puntuacion.getNombreJugador()} ganó!
+        ✅ Aciertos: ${puntuacion.getAciertos()}
+        🔁 Movimientos: ${puntuacion.getMovimientos()}
+        📐 Tablero: ${dimension}x${dimension}
+        """.trimIndent()
+
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, texto)
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(intent, "Compartir puntaje"))
     }
 
     private fun mostrarDialogoDerrota() {
@@ -367,14 +391,15 @@ class GameActivity : AppCompatActivity(), GameEventListener {
             this.updater.getAciertos(),
             this.updater.getMovimientos(),
             this.updater.getCantidadBarcos(),
-            this.updater.getDimensionTablero()
+            this.dimensionTablero
         )
         this.juegoTerminado = true
         this.countDownTimer?.cancel()
         deshabilitarTablero()
-        if (LeaderboardManager.entraAlRanking(this, this.ultimaPuntuacion))
+        if (LeaderboardManager.entraAlRanking(this, this.ultimaPuntuacion)) {
+            actualizarLeaderboard(this, this.ultimaPuntuacion)
             mostrarDialogoVictoriaLeaderboard(this.ultimaPuntuacion)
-        else mostrarDialogoVictoria()
+        } else mostrarDialogoVictoria()
     }
 
     override fun onGameRestart() {
