@@ -6,6 +6,7 @@
     <string name="main_ingresarDificultad">Select difficulty</string>
     <string name="main_hintNombre">Tina Torpedo</string>
     <string name="main_jugar">Let\'s Play!</string>
+    <string name="nombre_jugador">⚓ Captain %1$s</string>
     <string name="game_btn_reiniciar">🔄 Reset</string>
     <string name="game_btn_menu">Options menu</string>
     <string name="updater_restantes">Ships left: %1$d</string>
@@ -14,8 +15,8 @@
     <string name="updater_aciertos">Hits: %1$d</string>
     <string name="updater_tocado">Hit!</string>
     <string name="updater_agua">Missed!</string>
-    <string name="updater_victoria">Victory! 🥳🎉 you won with %1$d moves. You found %2$d ships and %3$d splashes!</string>
     <string name="game_menu_popup_help">ℹ️ About the game</string>
+    <string name="share_score_chooser_title">Share score via</string>
     <string name="help_title">Welcome to Mini Battleship</string>
     <string name="help_introduction_header">Are you ready to get splashed?</string>
     <string name="help_introduction_text">This is a single-player mini version of the classic Battleship</string>
@@ -34,7 +35,22 @@
     <string name="help_winning_header">🏆 Victory and Glory! 🎉🤘</string>
     <string name="help_winning_text">The game ends when all ships have been found. Celebrate the triumph and work towards improving your score each game!</string>
     <string name="help_good_luck">May the winds be in your favor, Captain!</string>
-    <string name="button_back">← Back</string>
+    <string name="button_back">🔙 Back</string>
     <string name="game_menu_popup_inicio">🏠 Home</string>
-    <string name="leaderboard_title">🏆 Top 5 players 🏆</string>
+    <string name="leaderboard_title">🏆 Top 5 captains 🏆</string>
+    <string name="timer_segundos_restantes">Time ⏱ %1$d seconds</string>
+    <string name="dialog_title_victory">🎉 You won!</string>
+    <string name="dialog_message_victory_no_ranking">You found all the ships in time, but didn’t make it to the Top 5</string>
+    <string name="dialog_message_victory_ranking">You found all the ships in time and made it to the leaderboard!</string>
+    <string name="dialog_button_try_again">Try again!</string>
+    <string name="dialog_button_play_again">Play again!</string>
+    <string name="dialog_button_go_home_screen">Back to home screen!</string>
+    <string name="dialog_button_view_ranking">View ranking!</string>
+    <string name="dialog_button_share">Share!</string>
+    <string name="dialog_title_defeat">⏱ Time\'s up</string>
+    <string name="dialog_message_defeat">You didn’t find all the ships in time</string>
+    <string name="dialog_button_go_home_defeat">Return to home screen</string>
+    <string name="share_score_text_template">🚢 Mini Battleship\\n🎉 %1$s won!\\n✅ Hits: %2$d\\n🔁 Moves: %3$d\\n📐 Board: %4$dx%5$d</string>
+    <string name="leaderboard_text_template">%1$d. ⚓ %2$s: %3$d hits / %4$d moves</string>
+    <string name="input_error_empty">Please enter a name</string>
 </resources>

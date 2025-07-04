@@ -34,65 +34,60 @@
 
         <TextView
             android:id="@+id/tvRank1"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:textAlignment="textStart"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
         <TextView
             android:id="@+id/tvRank2"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:textAlignment="textStart"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
         <TextView
             android:id="@+id/tvRank3"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:textAlignment="textStart"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
         <TextView
             android:id="@+id/tvRank4"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:textAlignment="textStart"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
 
         <TextView
             android:id="@+id/tvRank5"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
+            android:textAlignment="textStart"
             tools:text=""
             app:layout_constraintTop_toBottomOf="@+id/tvLeaderboardTitulo"
             />
@@ -101,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="🤯😎🥳"
+            android:text="@string/leaderboard_emojis"
             android:textSize="90sp"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"

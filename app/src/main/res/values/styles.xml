@@ -47,14 +47,10 @@
         <item name="android:layout_marginBottom">8dp</item>
     </style>
 
-    <!-- Asumiendo que tienes colores definidos en colors.xml como: -->
-    <!-- <color name="colorPrimario">#FF000000</color> -->
-    <!-- <color name="colorSecundario">#FF6200EE</color> -->
-    <!-- <color name="colorTextoPrincipal">#FF000000</color> -->
-    <!-- <color name="colorTextoSecundario">#8A000000</color> (negro con 54% alpha) -->
-    <!-- <color name="colorTextoTitulos">@color/colorPrimario</color> -->
-
-    <!-- También asumiendo que tienes fuentes en res/font/ -->
-    <!-- Por ejemplo: @font/pirata_one_regular y @font/chelsea_market_regular -->
-    <!-- Si no usas fuentes personalizadas, puedes quitar android:fontFamily o usar las de sistema -->
+    <style name="estilo_leaderboard_tvRank">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorSecundario</item>
+        <item name="android:fontFamily">@font/chelsea_market_regular</item>
+        <item name="android:textStyle">bold</item>
+    </style>
         </resources>

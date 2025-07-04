@@ -11,7 +11,7 @@
     <!-- Información y Menú -->
 
     <ImageButton
-        android:id="@+id/btnGameHelp"
+        android:id="@+id/btnPopupMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -29,12 +29,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnGameHelp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPopupMenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvTiempoRestante"
+            android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -79,7 +79,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <!-- Tablero -->
+    <!-- TableroLogico -->
 
     <GridLayout
         android:id="@+id/glTablero"

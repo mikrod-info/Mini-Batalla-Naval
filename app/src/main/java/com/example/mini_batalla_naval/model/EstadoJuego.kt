@@ -50,6 +50,8 @@ data class UpdaterEstado(
 
 @Parcelize
 data class JuegoEstado(
+    val nombreJugadorData: String,
+    val segundosRestantesData: Int,
     val dimensionTableroData: Int,
     val juegoTerminadoData: Boolean,
     val tableroLogicoData: TableroLogicoEstado,

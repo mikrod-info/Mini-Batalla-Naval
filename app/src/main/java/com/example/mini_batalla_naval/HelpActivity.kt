@@ -11,8 +11,6 @@ class HelpActivity : AppCompatActivity() {
 
         val buttonBack: Button = findViewById(R.id.btnVolverHelp)
         buttonBack.setOnClickListener {
-            // Esta acción finaliza (cierra) la actividad actual (HelpActivity)
-            // y vuelve a la actividad anterior desde la que fue llamada.
             finish()
         }
 
