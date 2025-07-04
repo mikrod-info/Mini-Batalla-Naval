@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
-//import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mini_batalla_naval.model.GameSettings
+import com.example.mini_batalla_naval.model.GameSettings.getDimensionSegunOpcion
 
 //Grupo1: Kruk, Ivana y Rodriguez, Miguel
 class MainActivity : AppCompatActivity() {
@@ -26,56 +26,55 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         inicializarVistas()
+        setupButtonListener()
         setupSpinner()
 
     }
 
-    private fun setupSpinner() {
-        spinner = this.findViewById<Spinner>(R.id.spinner)
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                dimensionTablero = when (position) {
-                    0 -> 6
-                    1 -> 8
-                    2 -> 10
-                    else -> 6
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                dimensionTablero = 6
-            }
-        }
+    private fun inicializarVistas() {
+        this.etNombre = this.findViewById<EditText>(R.id.etNombre)
+        this.btnJugar = this.findViewById<Button>(R.id.btnJugar)
+        this.btnHelp = this.findViewById<ImageButton>(R.id.btnPopupMenu)
+        this.spinner = this.findViewById<Spinner>(R.id.spinner)
     }
 
-    private fun inicializarVistas() {
-        etNombre = this.findViewById<EditText>(R.id.etNombre)
-
-
-        btnJugar = this.findViewById<Button>(R.id.btnJugar)
-        btnJugar.setOnClickListener {
+    private fun setupButtonListener() {
+        this.btnJugar.setOnClickListener {
             this.nombreJugador = etNombre.text.toString().trim()
             if (this.nombreJugador.isEmpty()) {
-                Toast.makeText(this, "Por favor ingrese un nombre", Toast.LENGTH_SHORT).show()
+                this.etNombre.error = String.format(this.getString(R.string.input_error_empty))
+                this.etNombre.requestFocus()
+                return@setOnClickListener
             } else {
                 val intent = Intent(this, GameActivity::class.java).apply {
-                    putExtra("DIMENSION_TABLERO", dimensionTablero)
                     putExtra("NOMBRE_JUGADOR", nombreJugador)
+                    putExtra("DIMENSION_TABLERO", dimensionTablero)
                 }
                 startActivity(intent)
             }
 
         }
 
-        btnHelp = this.findViewById<ImageButton>(R.id.btnGameHelp)
-        btnHelp.setOnClickListener {
+        this.btnHelp.setOnClickListener {
             val intent = Intent(this, HelpActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setupSpinner() {
+        this.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                dimensionTablero = getDimensionSegunOpcion(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                dimensionTablero = GameSettings.DEFAULT_DIMENSION
+            }
         }
     }
 }

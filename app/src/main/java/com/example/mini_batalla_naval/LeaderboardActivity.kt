@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mini_batalla_naval.model.LeaderboardTextView.mostrarLeaderboard
+import com.example.mini_batalla_naval.model.LeaderboardManager.obtenerLeaderboard
 import com.example.mini_batalla_naval.model.Puntuacion
 
 class LeaderboardActivity : AppCompatActivity() {
@@ -51,7 +51,7 @@ class LeaderboardActivity : AppCompatActivity() {
                 this.tvRank5
             )
 
-        mostrarLeaderboard(this, listaTextView)
+        mostrarLeaderboard(listaTextView)
 
     }
 
@@ -69,5 +69,25 @@ class LeaderboardActivity : AppCompatActivity() {
         this.tvRank3 = findViewById<TextView>(R.id.tvRank3)
         this.tvRank4 = findViewById<TextView>(R.id.tvRank4)
         this.tvRank5 = findViewById<TextView>(R.id.tvRank5)
+    }
+
+    private fun mostrarLeaderboard(listaTextView: List<TextView>) {
+        val formato = this.getString(R.string.leaderboard_text_template)
+        val leaderboard = obtenerLeaderboard(this)
+        for (i in listaTextView.indices) {
+            if (i < leaderboard.size) {
+                val puntuacion = leaderboard[i]
+                listaTextView[i].text =
+                    String.format(
+                        formato,
+                        (i + 1),
+                        puntuacion.getNombreJugador(),
+                        puntuacion.getAciertos(),
+                        puntuacion.getMovimientos()
+                    )
+            } else {
+                listaTextView[i].text = ""
+            }
+        }
     }
 }

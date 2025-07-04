@@ -55,7 +55,7 @@ object LeaderboardManager {
         if (listaPuntuaciones.isEmpty()) return true
         if (listaPuntuaciones.size < MAX_ENTRIES) return true
 
-        return ultimaPuntuacion.getPuntos() < listaPuntuaciones.last().getPuntos()
+        return ultimaPuntuacion.getPuntos() > listaPuntuaciones.last().getPuntos()
     }
 
 }

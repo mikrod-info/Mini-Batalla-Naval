@@ -7,6 +7,7 @@
     android:padding="32dp"
     tools:context=".LeaderboardActivity">
 
+    <!-- Guideline vertical para dividir la pantalla -->
     <TextView
         android:id="@+id/tvLeaderboardTitulo"
         style="@style/estilo_titulo"
@@ -16,11 +17,11 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/guideline_vertical_center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.15" />
 
-    <!-- Guideline vertical para dividir la pantalla -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_center"
         android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
         android:id="@+id/llLeaderboardList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
+        android:layout_margin="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_center"
@@ -42,60 +43,60 @@
 
         <TextView
             android:id="@+id/tvRank1"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="" />
+            tools:text=""
+            android:textSize="20sp"
+            android:textAlignment="textStart"/>
 
         <TextView
             android:id="@+id/tvRank2"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="" />
+            android:textSize="20sp"
+            tools:text=""
+            android:textAlignment="textStart"/>
 
         <TextView
             android:id="@+id/tvRank3"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="" />
+            android:textSize="20sp"
+            tools:text=""
+            android:textAlignment="textStart"/>
 
         <TextView
             android:id="@+id/tvRank4"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="" />
+            android:textSize="20sp"
+            tools:text=""
+            android:textAlignment="textStart"/>
 
         <TextView
             android:id="@+id/tvRank5"
-            style="@style/estilo_subtitulo"
+            style="@style/estilo_leaderboard_tvRank"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="" />
+            android:textSize="20sp"
+            tools:text=""
+            android:textAlignment="textStart"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="🤯😎🥳"
+        android:text="@string/leaderboard_emojis"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/btnVolverLeaderboard"
         app:layout_constraintEnd_toEndOf="parent"

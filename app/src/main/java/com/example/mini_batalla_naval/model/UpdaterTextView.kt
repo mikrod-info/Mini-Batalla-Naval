@@ -11,7 +11,7 @@ class UpdaterTextView(
     private var tvAciertos: TextView,
     private var tvMensajeJuego: TextView,
     private var cantidadBarcos: Int,
-    private var gameEventListener: GameEventListener
+    private val gameEventListener: GameEventListener
 ) {
     private var valorRestante: Int
     private var valorMovimientos: Int
@@ -22,7 +22,6 @@ class UpdaterTextView(
     private val strAciertos: String
     private val strAgua: String
     private val strTocado: String
-    private val strMensajeVictoria: String
     private var strMensajeJuego: String
 
     init {
@@ -37,7 +36,6 @@ class UpdaterTextView(
         this.strAciertos = this.context.getString(R.string.updater_aciertos)
         this.strAgua = this.context.getString(R.string.updater_agua)
         this.strTocado = this.context.getString(R.string.updater_tocado)
-        this.strMensajeVictoria = this.context.getString(R.string.updater_victoria)
         this.strMensajeJuego = ""
 
         actualizarVistasContadores()
@@ -75,8 +73,8 @@ class UpdaterTextView(
         actualizarVistasContadores()
         actualizarVistaMensajeJuego()
 
-        if (esVictoria()) {
-            informarVictoria()
+        if (esVictoria()){
+            this.tvMensajeJuego.text = ""
             this.gameEventListener.onGameWon()
         }
     }
@@ -112,10 +110,6 @@ class UpdaterTextView(
         return this.valorAciertos == this.cantidadBarcos
     }
 
-    private fun informarVictoria(){
-        this.strMensajeJuego = String.format(this.strMensajeVictoria, this.valorMovimientos, this.valorAciertos, this.valorFallos)
-        actualizarVistaMensajeJuego()
-    }
     fun getMovimientos(): Int {
         return this.valorMovimientos
     }

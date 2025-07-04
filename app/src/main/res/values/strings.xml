@@ -7,6 +7,7 @@
     <string name="main_hintNombre">Mario Misiles</string>
     <string name="main_jugar">¡Jugar!</string>
     <string name="main_btn_help">Botón de ayuda</string>
+    <string name="input_error_empty">Por favor ingrese un nombre</string>
     <string-array name="opciones_dificultad_array">
         <item>6 x 6</item>
         <item>8 x 8</item>
@@ -14,6 +15,7 @@
     </string-array>
 
     <!-- game -->
+    <string name="nombre_jugador">⚓ Capitán %1$s</string>
     <string name="game_btn_reiniciar">🔄 Reiniciar</string>
     <string name="game_btn_menu">Menú de opciones</string>
     <string name="updater_restantes">Barcos restantes: %1$d</string>
@@ -21,11 +23,31 @@
     <string name="updater_aciertos">Aciertos: %1$d</string>
     <string name="updater_tocado">¡Tocado!</string>
     <string name="updater_agua">¡Agua!</string>
-    <string name="updater_victoria">¡Victoria! 🥳🎉 ganaste en %1$d movimientos. ¡Encontraste %2$d barcos y %3$d olitas!</string>
     <string name="emoji_barco" translatable="false">🛳</string>
     <string name="emoji_agua" translatable="false">🌊</string>
     <string name="game_menu_popup_inicio">🏠 Inicio</string>
     <string name="game_menu_popup_help">ℹ️ Información del juego</string>
+
+    <!-- game timer -->
+    <string name="timer_segundos_restantes">Tiempo ⏱ %1$d segundos</string>
+
+    <!-- game dialog -->
+    <string name="dialog_title_victory">🎉 ¡Ganaste!</string>
+    <string name="dialog_message_victory_no_ranking">Encontraste todos los barcos a tiempo, pero no entraste al Top 5</string>
+    <string name="dialog_message_victory_ranking">¡Encontraste todos los barcos a tiempo y accediste al ranking!</string>
+    <string name="dialog_button_try_again">¡Intentar de nuevo!</string>
+    <string name="dialog_button_play_again">¡Jugar de nuevo!</string>
+    <string name="dialog_button_go_home_screen">¡Ir al inicio!</string>
+    <string name="dialog_button_view_ranking">¡Ver ranking!</string>
+    <string name="dialog_button_share">¡Compartir!</string>
+
+    <string name="dialog_title_defeat">⏱ Tiempo agotado</string>
+    <string name="dialog_message_defeat">No lograste encontrar todos los barcos a tiempo</string>
+    <string name="dialog_button_go_home_defeat">Volver a Inicio</string>
+
+    <string name="share_score_text_template">🚢 Mini Batalla Naval\n🎉 ¡%1$s ganó!\n✅ Aciertos: %2$d\n🔁 Movimientos: %3$d\n📐 Tablero: %4$dx%5$d</string>
+    <string name="share_score_chooser_title">Compartir puntaje vía</string>
+
 
     <!-- help -->
     <string name="help_title">¡Bienvenid@ a Mini Batalla Naval!</string>
@@ -46,9 +68,11 @@
     <string name="help_winning_header">🏆 ¡Victoria y Gloria! 🎉🤘</string>
     <string name="help_winning_text">La partida finaliza cuando todos los barcos enemigos hayan sido descubiertos. ¡Celebrá el triunfo y esforzate por mejorar tu puntuación en cada partida!</string>
     <string name="help_good_luck">¡Que los vientos te sean favorables, Capitán!</string>
-    <string name="button_back">← Volver</string>
+    <string name="button_back">🔙 Volver</string>
 
     <!-- leaderboard -->
-    <string name="leaderboard_title">🏆 Los 5 mejores jugadores 🏆</string>
+    <string name="leaderboard_title">🏆 Top 5 capitanes 🏆</string>
+    <string name="leaderboard_text_template">%1$d. ⚓ %2$s: %3$d aciertos/ %4$d movimientos</string>
+    <string name="leaderboard_emojis" translatable="false">🤯😎🥳</string>>
 
 </resources>

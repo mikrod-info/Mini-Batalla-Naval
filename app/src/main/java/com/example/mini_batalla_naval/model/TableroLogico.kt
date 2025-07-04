@@ -1,6 +1,6 @@
 package com.example.mini_batalla_naval.model
 
-class Tablero(
+class TableroLogico(
     private var filas: Int,
     private var columnas: Int
 ) {
@@ -36,8 +36,9 @@ class Tablero(
     }
 
     fun restaurarEstado(estado: TableroLogicoEstado) {
-        this.filas = estado.dimensionTableroData
-        this.columnas = estado.dimensionTableroData
+        //test para verificar si es necesario guardar el estado de filas y columnas, dado que se inicializan en el constructor
+//        this.filas = estado.dimensionTableroData
+//        this.columnas = estado.dimensionTableroData
         this.cantidadBarcos = estado.cantidadBarcosData
         this.celdas = Array(this.filas) { f ->
             Array(this.columnas) { c ->
@@ -52,7 +53,7 @@ class Tablero(
 
     //métodos públicos
 
-    fun fueAcierto(fila: Int, columna: Int): Boolean {
+    fun tieneBarco(fila: Int, columna: Int): Boolean {
         return this.celdas[fila][columna].esBarco()
     }
 
@@ -87,7 +88,7 @@ class Tablero(
             val filaRandom = randomEnRango(0, this.filas - 1)
             val columnaRandom = randomEnRango(0, this.columnas - 1)
 
-            if (!fueAcierto(filaRandom, columnaRandom)) {
+            if (!tieneBarco(filaRandom, columnaRandom)) {
                 this.celdas[filaRandom][columnaRandom].setBarco()
                 barcosCargados++
             }
