@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import com.example.mini_batalla_naval.model.GameSettings
 import com.example.mini_batalla_naval.model.GameSettings.getDimensionSegunOpcion
 
@@ -16,7 +17,7 @@ import com.example.mini_batalla_naval.model.GameSettings.getDimensionSegunOpcion
 class MainActivity : AppCompatActivity() {
     private lateinit var spinner: Spinner
     private lateinit var btnJugar: Button
-    private lateinit var btnHelp: ImageButton
+    private lateinit var btnPopupMenu: ImageButton
     private lateinit var etNombre: EditText
     private var dimensionTablero: Int = 6
     private var nombreJugador: String = ""
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun inicializarVistas() {
         this.etNombre = this.findViewById<EditText>(R.id.etNombre)
         this.btnJugar = this.findViewById<Button>(R.id.btnJugar)
-        this.btnHelp = this.findViewById<ImageButton>(R.id.btnPopupMenu)
+        this.btnPopupMenu = this.findViewById<ImageButton>(R.id.btnPopupMenu)
         this.spinner = this.findViewById<Spinner>(R.id.spinner)
     }
 
@@ -55,9 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        this.btnHelp.setOnClickListener {
-            val intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent)
+        this.btnPopupMenu.setOnClickListener {
+            showMainPopupMenu(it)
         }
     }
 
@@ -76,5 +76,30 @@ class MainActivity : AppCompatActivity() {
                 dimensionTablero = GameSettings.DEFAULT_DIMENSION
             }
         }
+    }
+
+    private fun showMainPopupMenu(view: View) {
+        val popup = PopupMenu(this, view)
+        val inflater = popup.menuInflater
+        inflater.inflate(R.menu.menu_pop_main, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.opLeaderboard -> {
+                    val intent = Intent(this, LeaderboardActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.opAyuda -> {
+                    val intent = Intent(this, HelpActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
+        popup.show()
     }
 }

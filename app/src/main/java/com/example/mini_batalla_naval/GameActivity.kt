@@ -285,7 +285,7 @@ class GameActivity : AppCompatActivity(), GameEventListener, TimerInterface, Dia
     private fun showGamePopupMenu(view: View) {
         val popup = PopupMenu(this, view)
         val inflater = popup.menuInflater
-        inflater.inflate(R.menu.menu_popup, popup.menu)
+        inflater.inflate(R.menu.menu_popup_game, popup.menu)
 
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -331,13 +331,8 @@ class GameActivity : AppCompatActivity(), GameEventListener, TimerInterface, Dia
         )
     }
 
-    private fun irALeaderboard(ultimaPuntuacion: Puntuacion) {
+    private fun irALeaderboard() {
         val intent = Intent(this, LeaderboardActivity::class.java)
-        intent.putExtra("NOMBRE_JUGADOR", ultimaPuntuacion.getNombreJugador())
-        intent.putExtra("ACIERTOS", ultimaPuntuacion.getAciertos())
-        intent.putExtra("MOVIMIENTOS", ultimaPuntuacion.getMovimientos())
-        intent.putExtra("CANTIDAD_BARCOS", ultimaPuntuacion.getCantidadBarcos())
-        intent.putExtra("DIMENSION_TABLERO", ultimaPuntuacion.getDimensionTablero())
         startActivity(intent)
     }
 
@@ -356,8 +351,8 @@ class GameActivity : AppCompatActivity(), GameEventListener, TimerInterface, Dia
         finish()
     }
 
-    override fun onDialogShowLeaderboard(puntuacion: Puntuacion) {
-        irALeaderboard(puntuacion)
+    override fun onDialogShowLeaderboard() {
+        irALeaderboard()
     }
 
     override fun onDialogShareScore(puntuacion: Puntuacion) {
