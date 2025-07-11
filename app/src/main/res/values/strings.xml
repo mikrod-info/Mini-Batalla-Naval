@@ -7,6 +7,7 @@
     <string name="main_hintNombre">Mario Misiles</string>
     <string name="main_jugar">¡Jugar!</string>
     <string name="main_btn_help">Botón de ayuda</string>
+    <string name="main_menu_popup_inicio">🏆 Ranking</string>
     <string name="input_error_empty">Por favor ingrese un nombre</string>
     <string-array name="opciones_dificultad_array">
         <item>6 x 6</item>
@@ -45,7 +46,7 @@
     <string name="dialog_message_defeat">No lograste encontrar todos los barcos a tiempo</string>
     <string name="dialog_button_go_home_defeat">Volver a Inicio</string>
 
-    <string name="share_score_text_template">🚢 Mini Batalla Naval\n🎉 ¡%1$s ganó!\n✅ Aciertos: %2$d\n🔁 Movimientos: %3$d\n📐 Tablero: %4$dx%5$d</string>
+    <string name="share_score_text_template">🚢 Mini Batalla Naval\n🎉 ¡Capitán %1$s ganó!\n✅ Aciertos: %2$d\n🔁 Movimientos: %3$d\n📐 Tablero: %4$dx%5$d</string>
     <string name="share_score_chooser_title">Compartir puntaje vía</string>
 
 
@@ -73,6 +74,7 @@
     <!-- leaderboard -->
     <string name="leaderboard_title">🏆 Top 5 capitanes 🏆</string>
     <string name="leaderboard_text_template">%1$d. ⚓ %2$s: %3$d aciertos/ %4$d movimientos</string>
-    <string name="leaderboard_emojis" translatable="false">🤯😎🥳</string>>
+    <string name="leaderboard_emojis" translatable="false">🤯😎🥳</string>
+    <string name="button_back_to_home">🔙 Volver a inicio</string>
 
 </resources>

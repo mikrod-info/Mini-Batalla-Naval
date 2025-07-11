@@ -27,7 +27,7 @@ class DialogManager(
             .setPositiveButton(context.getString(R.string.dialog_button_play_again))
             { _, _ -> dialogListener.onDialogRestartGame() }
             .setNegativeButton(context.getString(R.string.dialog_button_view_ranking))
-            { _, _ -> dialogListener.onDialogShowLeaderboard(puntuacion) }
+            { _, _ -> dialogListener.onDialogShowLeaderboard() }
             .setNeutralButton(context.getString(R.string.dialog_button_share))
             { _, _ -> dialogListener.onDialogShareScore(puntuacion)}
             .setCancelable(false)

@@ -50,7 +50,9 @@
     <string name="dialog_title_defeat">⏱ Time\'s up</string>
     <string name="dialog_message_defeat">You didn’t find all the ships in time</string>
     <string name="dialog_button_go_home_defeat">Return to home screen</string>
-    <string name="share_score_text_template">🚢 Mini Battleship\\n🎉 %1$s won!\\n✅ Hits: %2$d\\n🔁 Moves: %3$d\\n📐 Board: %4$dx%5$d</string>
+    <string name="share_score_text_template">🚢 Mini Battleship\\n🎉 Captain %1$s won!\\n✅ Hits: %2$d\\n🔁 Moves: %3$d\\n📐 Board: %4$dx%5$d</string>
     <string name="leaderboard_text_template">%1$d. ⚓ %2$s: %3$d hits / %4$d moves</string>
+    <string name="main_menu_popup_inicio">🏆 Leaderboard</string>
     <string name="input_error_empty">Please enter a name</string>
+    <string name="button_back_to_home">🔙 Back to home</string>
 </resources>
